@@ -55,6 +55,7 @@
   <!-- User must include the .xml file for each camera with unique values for "camera" and 
        either the "serial_no" or "usb_port_id" of the camera.
        "camera" should be a user friendly string that follows the ROS Names convention. -->
+<!--
   <group ns="$(arg camera1)">
     <include file="$(find realsense_camera)/launch/includes/nodelet_rgbd.launch.xml">
       <arg name="manager"      value="/$(arg manager)" />
@@ -75,8 +76,9 @@
 	  <arg name="enable_ir"					value="$(arg enable_ir)" />
 	  <arg name="enable_ir2"					value="$(arg enable_ir2)" />
     </include>
-
+-->
 	<!-- Load standard constellation of processing nodelets -->
+<!--
     <include file="$(find rgbd_launch)/launch/includes/processing.launch.xml">
       <arg name="manager"                         value="$(arg manager)" />
       <arg name="rgb"                             value="$(arg rgb)" />
@@ -94,7 +96,8 @@
       <arg name="sw_registered_processing"        value="$(arg sw_registered_processing)" />
     </include>
   </group> 
-
+-->
+<!--
   <group ns="$(arg camera2)">
     <include file="$(find realsense_camera)/launch/includes/nodelet_rgbd.launch.xml">
       <arg name="manager"      value="/$(arg manager)" />
@@ -115,8 +118,9 @@
 	  <arg name="enable_ir"					value="$(arg enable_ir)" />
 	  <arg name="enable_ir2"					value="$(arg enable_ir2)" />
     </include>
-
+-->
 	<!-- Load standard constellation of processing nodelets -->
+<!--
     <include file="$(find rgbd_launch)/launch/includes/processing.launch.xml">
       <arg name="manager"                         value="$(arg manager)" />
       <arg name="rgb"                             value="$(arg rgb)" />
@@ -134,7 +138,7 @@
       <arg name="sw_registered_processing"        value="$(arg sw_registered_processing)" />
     </include>
   </group>
-
+-->
   <group ns="$(arg camera3)">
     <include file="$(find realsense_camera)/launch/includes/nodelet_rgbd.launch.xml">
       <arg name="manager"      value="/$(arg manager)" />
