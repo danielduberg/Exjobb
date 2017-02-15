@@ -1,6 +1,7 @@
 #include "ros/ros.h"
 
-#include "std_msgs/String.h"
+// Own
+#include "exjobb_msgs/Distance.h"
 
 class Sensor {
 public:
@@ -17,7 +18,13 @@ private:
 public:
     Sensor(float offset, float angle, std::string topic);
     
-    void callback(const std_msgs::String::ConstPtr & msg);
+    // Copy constructor
+    Sensor(const Sensor & other);
+    
+    // Copy constructor
+    Sensor(Sensor & other);
+    
+    void callback(const exjobb_msgs::Distance::ConstPtr & msg);
     
     /**
      * @brief timeSinceLastUpdate

@@ -4,16 +4,20 @@
 
 class Sr300 {
 private:
-    float offset, angle;
-
-    std::string topic;
+	std::string topic;
 
     int bottomLimit, topLimit, leftLimit, rightLimit;
 
     ros::Publisher pub;
 
 public:
-    Sr300(ros::NodeHandle nh, float offset, float angle, std::string topic, int bottomLimit, int topLimit, int leftLimit, int rightLimit);
+    Sr300(std::string topic, int bottomLimit, int topLimit, int leftLimit, int rightLimit);
+    
+    // Copy constructor
+    Sr300(const Sr300 & other);
+    
+    // Another copy
+    Sr300(Sr300 & other);
 
     void callback(const sensor_msgs::Image::ConstPtr & msg);
 };

@@ -1,0 +1,5 @@
+<launch>
+	<rosparam file="$(find general)/config/general_params.yaml" command="load" />
+	<node pkg="naive_imp" type="naive_imp_node" name="naive_imp_node" output="screen" />
+		
+</launch>

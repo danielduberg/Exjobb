@@ -1,0 +1,5 @@
+<launch>
+	<rosparam file="$(find general)/config/general_params.yaml" command="load" />
+	<node pkg="transform" type="transform_node" name="transform_node" output="screen" />
+		
+</launch>
