@@ -1,0 +1,29 @@
+<launch>
+  <node pkg="nodelet" type="nodelet" name="uvc_camera" args="manager" output="screen"/>
+
+
+  <node pkg="nodelet" type="nodelet" name="uvc_camera_stereo" args="load uvc_camera/StereoNodelet /camera_process" output="screen">
+    <param name="width" type="int" value="320" />
+    <param name="height" type="int" value="240" />
+    <param name="fps" type="int" value="30" />
+    <param name="frame" type="string" value="wide_stereo" />
+
+    <param name="auto_focus" type="bool" value="False" />
+    <param name="focus_absolute" type="int" value="0" />
+    <!-- other supported params: auto_exposure, exposure_absolute, brightness, power_line_frequency -->
+
+    <param name="left/device" type="string" value="/dev/video0" />
+    <param name="right/device" type="string" value="/dev/video2" />
+    <param name="left/camera_info_url" type="string" value="file://$(find uvc_camera)/example-left.yaml" />
+    <param name="right/camera_info_url" type="string" value="file://$(find uvc_camera)/example-right.yaml" />
+    
+    <remap from="/left/image_raw" to="/stereo/left/image_raw" />
+    <remap from="/left/camera_info" to="/stereo/left/camera_info" />
+    <remap from="/right/image_raw" to="/stereo/right/image_raw" />
+    <remap from="/right/camera_info" to="/stereo/right/camera_info" />
+  </node>
+  
+  <node ns="stereo" name="stereo_image_proc" pkg="stereo_image_proc" type="stereo_image_proc">
+        <remap from="stereo_image_proc" to="proc" />
+  </node>
+</launch>
