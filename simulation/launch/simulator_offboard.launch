@@ -1,6 +1,6 @@
 <launch>
 	<node name="gazebo_client" pkg="gazebo_ros" type="gzclient">
 	    <env name="GAZEBO_IP" value="10.0.0.1" />
-	    <env name="GAZEBO_MASTER_URI="10.0.0.2:12345" />
+	    <env name="GAZEBO_MASTER_URI" value="10.0.0.2:12345" />
 	</node>
 </launch>

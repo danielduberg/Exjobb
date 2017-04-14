@@ -17,7 +17,7 @@
 	    <env name="GAZEBO_MASTER_URI" value="10.0.0.2:12345" />
 	    <arg name="headless" value="$(arg headless)"/>
         <arg name="gui" value="$(arg gui)"/>
-        <arg name="world_name" value="$(arg world)" />
+        <arg name="world" value="$(arg world)" />
         <arg name="debug" value="$(arg debug)" />
         <arg name="verbose" value="$(arg verbose)" />
         <arg name="paused" value="$(arg paused)" />
