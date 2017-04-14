@@ -3,4 +3,6 @@
 	    <env name="GAZEBO_IP" value="10.0.0.1" />
 	    <env name="GAZEBO_MASTER_URI" value="10.0.0.2:12345" />
 	</node>
+	
+	<node pkg="rqt_gui" type="rqt_gui" name="rqt_gui" args="--perspective-file $(find simulator)/launch/rqt/tele-operate.perspective" />
 </launch>
