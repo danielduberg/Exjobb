@@ -1,5 +1,5 @@
 <sdf version='1.6'>
-  <model name='kth_drone'>
+  <model name='laser_drone'>
     <link name='base_link'>
       <pose frame=''>0 0 0 0 -0 0</pose>
       <inertial>
@@ -602,46 +602,6 @@
       <accelerometerBiasCorrelationTime>300.0</accelerometerBiasCorrelationTime>
       <accelerometerTurnOnBiasSigma>0.196</accelerometerTurnOnBiasSigma>
     </plugin>
-    
-    <include>
-    	<uri>model://stereo_camera_1</uri>
-    	<pose>0.097 0 -0.06 0 0 0</pose>
-    </include>
-
-	<joint name='camera_1_joint' type='fixed'>
-		<child>stereo_camera_1::base_link</child>
-		<parent>base_link</parent>
-	</joint>
-	
-	<include>
-    	<uri>model://stereo_camera_2</uri>
-    	<pose>0 0.05 -0.06 0 0 1.57079633</pose>
-    </include>
-
-	<joint name='camera_2_joint' type='fixed'>
-		<child>stereo_camera_2::base_link</child>
-		<parent>base_link</parent>
-	</joint>
-	
-	<include>
-    	<uri>model://stereo_camera_3</uri>
-    	<pose>-0.097 0 -0.06 0 0 3.14159265</pose>
-    </include>
-
-	<joint name='camera_3_joint' type='fixed'>
-		<child>stereo_camera_3::base_link</child>
-		<parent>base_link</parent>
-	</joint>
-	
-	<include>
-    	<uri>model://stereo_camera_4</uri>
-    	<pose>0 -0.05 -0.06 0 0 4.71238898</pose>
-    </include>
-
-	<joint name='camera_4_joint' type='fixed'>
-		<child>stereo_camera_4::base_link</child>
-		<parent>base_link</parent>
-	</joint>
 	
 	<include>
 		<uri>model://laser</uri>

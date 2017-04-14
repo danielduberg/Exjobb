@@ -1,9 +1,9 @@
-width: 1000
-height: 1000
+width: 250
+height: 250
 
-pixels_per_meter: 175
+pixels_per_meter: 40
 
-obstacle_size: 10
+obstacle_size: 2
 
 min_distance_between_obstacles: 0.1
 
@@ -26,15 +26,15 @@ ORM_right_bound_color: [ 0, 128, 255 ]
 ORM_radius_color: [ 255, 255, 51 ]
 # Pink
 ORM_radius_security_distance_color: [ 153, 51, 255 ]
-ORM_goal_size: 24
-ORM_left_bound_size: 24
-ORM_right_bound_size: 24
-ORM_radius_size: 5
+ORM_goal_size: 6
+ORM_left_bound_size: 6
+ORM_right_bound_size: 6
+ORM_radius_size: 1
 
 sight_cone_range: 2
 
-control_size: 24
-target_size: 24
+control_size: 6
+target_size: 6
 
 robot_length: 0.4
 robot_width: 0.4
