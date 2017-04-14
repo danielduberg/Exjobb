@@ -3,6 +3,8 @@
     <arg name="gui" default="true"/>
 
     <arg name="world" default="$(find simulation)/worlds/office.world"/>
+    
+    <arg name="sdf" default="$(find simulation)/models/drone/drone.sdf"/>
 
     <arg name="debug" default="false"/>
     <arg name="verbose" default="true"/>

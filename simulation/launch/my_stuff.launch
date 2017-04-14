@@ -4,6 +4,8 @@
 	<include file="$(find control)/launch/control.launch" />	   
 	
 	<node name="laser_scan_broadcaster" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 /drone /laser 100" />
+	
+	<include file="$(find interface_map)/launch/interface_map.launch" /> 
 
 	<include file="$(find sensor_readings)/launch/sensor_readings.launch" />
 	   
