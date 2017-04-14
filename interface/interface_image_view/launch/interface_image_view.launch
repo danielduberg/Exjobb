@@ -1,0 +1,6 @@
+<launch>
+
+	<rosparam file="$(find interface_image_view)/config/interface_image_view_params.yaml" command="load" />
+	<node pkg="interface_image_view" type="interface_image_view_node" name="interface_image_view_node" output="screen" />
+	
+</launch>

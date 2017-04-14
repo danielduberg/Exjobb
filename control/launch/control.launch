@@ -1,0 +1,3 @@
+<launch>
+	<node pkg="control" type="control_node" name="control" />
+</launch>

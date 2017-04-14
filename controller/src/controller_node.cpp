@@ -1,8 +1,8 @@
-#include "ros/ros.h"
+#include <ros/ros.h>
 
-#include "sensor_msgs/Joy.h"
+#include <sensor_msgs/Joy.h>
 
-#include "controller/Control.h"
+#include <exjobb_msgs/Control.h>
 
 #define PI 3.14159265
 
@@ -10,9 +10,10 @@ ros::Publisher pub;
 
 float getDirection(float x, float y) {
     if (x == 0 && y == 0) {
-        return 90;
+        return 0;
     }
-    return std::fmod(((std::atan2(x, y) * 180 / PI) + 360), 360);
+    // 630 = 360 + 360 - 90
+    return std::fmod(((std::atan2(x, y) * 180 / PI) + 630), 360);
 }
 
 float getDistanceFromOrigo(float x, float y) {
@@ -68,7 +69,7 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg) {
     int touchpad_button = msg->buttons[13];
 
 
-    controller::Control control;
+    exjobb_msgs::Control control;
 
     control.goDirection = getDirection(ls_upDown, -ls_leftRight);
     control.goMagnitude = getDistanceFromOrigo(ls_upDown, ls_leftRight);
@@ -88,7 +89,7 @@ int main(int argc, char **argv) {
 
     ros::NodeHandle nh;
 
-    pub = nh.advertise<controller::Control>("control", 1000);
+    pub = nh.advertise<exjobb_msgs::Control>("control", 1000);
 
     ros::Subscriber sub = nh.subscribe("joy", 1000, controllerCallback);
 

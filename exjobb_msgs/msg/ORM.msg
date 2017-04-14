@@ -1,0 +1,13 @@
+Header header
+float32 goal_direction
+float32 left_bound
+float32 right_bound
+float32 radius
+float32 security_distance
+float32[] left_bound_points_x
+float32[] left_bound_points_y
+float32[] right_bound_points_x
+float32[] right_bound_points_y
+float32[4] rectangle
+float32[] points_inside_rectangle_x
+float32[] points_inside_rectangle_y

@@ -1,0 +1,1844 @@
+<sdf version='1.6'>
+	<model name="callibration_pattern">
+		<pose>0 0 0.05 0 0 0</pose>
+		<link name="link_1">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_2">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.1 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_3">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.2 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_4">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.3 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_5">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.4 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_6">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.5 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_7">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.6 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_8">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.7 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_9">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.8 0 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		
+		
+		<link name="link_10">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_11">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.1 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_12">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.2 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_13">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.3 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_14">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.4 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_15">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.5 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_16">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.6 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_17">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.7 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_18">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.8 0.1 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		
+		
+		<link name="link_20">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_21">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.1 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_22">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.2 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_23">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.3 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_24">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.4 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_25">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.5 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_26">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.6 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_27">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.7 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_28">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.8 0.2 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		
+		
+		<link name="link_30">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_31">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.1 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_32">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.2 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_33">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.3 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_34">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.4 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_35">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.5 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_36">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.6 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_37">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.7 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_38">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.8 0.3 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		
+		
+		
+		<link name="link_40">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_41">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.1 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_42">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.2 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_43">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.3 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_44">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.4 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_45">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.5 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_46">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.6 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_47">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.7 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_48">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.8 0.4 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		
+		
+		<link name="link_50">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_51">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.1 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_52">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.2 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_53">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.3 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_54">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.4 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_55">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.5 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_56">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.6 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_57">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.7 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_58">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.8 0.5 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		
+		
+		
+		<link name="link_60">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_61">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.1 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_62">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.2 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_63">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.3 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_64">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.4 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_65">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.5 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_66">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.6 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_67">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.7 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/White</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<link name="link_68">
+			<kinematic>1</kinematic>
+			<gravity>0</gravity>
+			<pose>0 0.8 0.6 0 0 0</pose>
+			<inertial>
+				<mass>0.001</mass>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.1 0.1</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+	</model>
+</sdf>

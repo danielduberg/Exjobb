@@ -1,0 +1,187 @@
+<sdf version='1.6'>
+	<model name="stereo_camera_2">
+		<link name="left_camera_link">
+			<pose frame=''>0 0.02 0 0 0 0</pose>
+			<inertial>
+				<mass>0.05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<!--
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.04 0.04 0.04</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Red</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+			-->
+			<sensor name='camera' type='wideanglecamera'>
+				<always_on>1</always_on>
+				<update_rate>10</update_rate>
+				<camera name='front'>
+					<horizontal_fov>3.05432619</horizontal_fov>
+					<image>
+						<width>320</width>
+						<height>240</height>
+						<format>R8G8B8</format>
+					</image>
+					<clip>
+						<near>0.02</near>
+						<far>100</far>
+					</clip>
+					<noise>
+						<type>gaussian</type>
+						<mean>0</mean>
+						<stddev>0.007</stddev>
+					</noise>
+					<lens>
+						<type>stereographic</type>
+						<scale_to_hfov>true</scale_to_hfov>
+						<cutoff_angle>1.5271631</cutoff_angle>
+						<env_texture_size>512</env_texture_size>
+					</lens>
+				</camera>
+				<plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
+					<alwaysOn>true</alwaysOn>
+					<updateRate>10.0</updateRate>
+					<cameraName>stereo_2/left</cameraName>
+					<imageTopicName>image_raw</imageTopicName>
+					<cameraInfoTopicName>camera_info</cameraInfoTopicName>
+					<frameName>left_camera_link</frameName>
+					<hackBaseline>0.04</hackBaseline>
+					<distortionK1>0.0</distortionK1>
+					<distortionK2>0.0</distortionK2>
+					<distortionK3>0.0</distortionK3>
+					<distortionT1>0.0</distortionT1>
+					<distortionT2>0.0</distortionT2>
+				</plugin>
+			</sensor>
+			<gravity>0</gravity>
+			<kinematic>0</kinematic>
+		</link>
+		
+		<link name="right_camera_link">
+			<pose frame=''>0 -0.02 0 0 0 0</pose>
+			<inertial>
+				<mass>0.05</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<!--
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.04 0.04 0.04</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Red</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+			-->
+			<sensor name='camera' type='wideanglecamera'>
+				<always_on>1</always_on>
+				<update_rate>10</update_rate>
+				<camera name='front'>
+					<horizontal_fov>3.05432619</horizontal_fov>
+					<image>
+						<width>320</width>
+						<height>240</height>
+						<format>R8G8B8</format>
+					</image>
+					<clip>
+						<near>0.02</near>
+						<far>100</far>
+					</clip>
+					<noise>
+						<type>gaussian</type>
+						<mean>0</mean>
+						<stddev>0.007</stddev>
+					</noise>
+					<lens>
+						<type>stereographic</type>
+						<scale_to_hfov>true</scale_to_hfov>
+						<cutoff_angle>1.5271631</cutoff_angle>
+						<env_texture_size>512</env_texture_size>
+					</lens>
+				</camera>
+				<plugin name='camera_controller' filename='libgazebo_ros_camera.so'>
+					<alwaysOn>true</alwaysOn>
+					<updateRate>10.0</updateRate>
+					<cameraName>stereo_2/right</cameraName>
+					<imageTopicName>image_raw</imageTopicName>
+					<cameraInfoTopicName>camera_info</cameraInfoTopicName>
+					<frameName>left_camera_link</frameName>
+					<hackBaseline>0.04</hackBaseline>
+					<distortionK1>0.0</distortionK1>
+					<distortionK2>0.0</distortionK2>
+					<distortionK3>0.0</distortionK3>
+					<distortionT1>0.0</distortionT1>
+					<distortionT2>0.0</distortionT2>
+				</plugin>
+			</sensor>
+			<gravity>0</gravity>
+			<kinematic>0</kinematic>
+		</link>
+		
+		<link name="base_link">
+			<pose frame=''>-0.02 0 0 0 0 0</pose>
+			<inertial>
+				<mass>0.01</mass>
+				<inertia>
+					<ixx>1e-05</ixx>
+					<ixy>0</ixy>
+					<ixz>0</ixz>
+					<iyy>1e-05</iyy>
+					<iyz>0</iyz>
+					<izz>1e-05</izz>
+				</inertia>
+			</inertial>
+			<visual name="visual">
+				<geometry>
+					<box>
+						<size>0.001 0.09 0.04</size>
+					</box>
+				</geometry>
+				<material>
+					<script>
+						<name>Gazebo/Black</name>
+						<uri>file://media/materials/scripts/gazebo.material</uri>
+					</script>
+				</material>
+			</visual>
+		</link>
+		
+		<joint name='left_camera_joint' type='fixed'>
+			<child>left_camera_link</child>
+			<parent>base_link</parent>
+		</joint>
+		
+		<joint name='right_camera_joint' type='fixed'>
+			<child>right_camera_link</child>
+			<parent>base_link</parent>
+		</joint>
+	</model>
+</sdf>

@@ -1,0 +1,7 @@
+min_distance: 0.2
+max_distance: 5.0
+num_points: 0
+sub_topics: [ '/laser/scan' ]
+pub_topic: 'sensor_readings'
+max_time: 1.0
+frequency: 10.0

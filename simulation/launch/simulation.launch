@@ -1,0 +1,3 @@
+<launch>
+	<node name="contact" pkg="simulation" type="simulation_node" output="screen" />
+</launch>
