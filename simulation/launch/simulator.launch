@@ -1,7 +1,25 @@
 <launch>
+    <arg name="headless" default="false"/>
+    <arg name="gui" default="true"/>
+
+    <arg name="world" default="$(find simulation)/worlds/office.world"/>
+
+    <arg name="debug" default="false"/>
+    <arg name="verbose" default="true"/>
+    <arg name="paused" default="false"/>
+
 	<include file="$(find mavros)/launch/px4.launch">
 		<arg name="fcu_url" value="udp://:14540@127.0.0.1:14557" />
 	</include>
 	
-	<include file="$(find px4)/launch/posix_sitl.launch" /> 
+	<include file="$(find px4)/launch/posix_sitl.launch">
+        <env name="GAZEBO_IP" value="10.0.0.2" />
+	    <env name="GAZEBO_MASTER_URI" value="10.0.0.2:12345" />
+	    <arg name="headless" value="$(arg headless)"/>
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="world_name" value="$(arg world)" />
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="verbose" value="$(arg verbose)" />
+        <arg name="paused" value="$(arg paused)" />
+	</include> 
 </launch>
