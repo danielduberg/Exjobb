@@ -117,7 +117,7 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
 
     // Publish
 
-    //ROS_ERROR_STREAM(msg->goDirection << ", " << msg->goMagnitude << "; " << collisionFreeControl.goDirection << ", " << collisionFreeControl.goMagnitude);
+    //ROS_ERROR_STREAM(msg->go_direction << ", " << msg->go_magnitude << "; " << collisionFreeControl.go_direction << ", " << collisionFreeControl.go_magnitude);
 
     collision_free_control_pub_.publish(collisionFreeControl);
 }

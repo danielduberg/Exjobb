@@ -27,12 +27,12 @@ ORM::ORM(float radius, float security_distance, float epsilon)
 
 bool ORM::avoidCollision(exjobb_msgs::Control * control, const std::vector<Point> & obstacles)
 {
-    if (control->goMagnitude == 0)
+    if (control->go_magnitude == 0)
     {
         return true;
     }
 
-    Point goal = initGoal(control->goDirection, 3);
+    Point goal = initGoal(control->go_direction, 3);
 
     // A. The Subgoal Selector
     // TODO: FIX
@@ -48,11 +48,11 @@ bool ORM::avoidCollision(exjobb_msgs::Control * control, const std::vector<Point
     //ROS_ERROR_STREAM("Between 3: " << Point::getDirection(goal) * 180.0 / PI);
 
     // B. Motion Computation
-    control->goDirection = motionComputation(goal, obstacles);
+    control->go_direction = motionComputation(goal, obstacles);
 
-    //control->goDirection = Point::GetDirectionDegrees(goal);
+    //control->go_direction = Point::GetDirectionDegrees(goal);
 
-    //ROS_ERROR_STREAM("Between 4: " << control->goDirection);
+    //ROS_ERROR_STREAM("Between 4: " << control->go_Direction);
 
     return true;
 }
