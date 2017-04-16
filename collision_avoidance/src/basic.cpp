@@ -35,7 +35,7 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
     float direction_epsilon = 40; // Five degrees
     float speed_epsilon = 0.2; // 0.2 meters per second?
 
-    float direction_diff = std::fabs(control->goDirection - current_direction);
+    float direction_diff = std::fabs(control->go_direction - current_direction);
     if (direction_diff > 180)
     {
         direction_diff = 360 - direction_diff;
@@ -46,13 +46,13 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
             current_speed > speed_epsilon)
     {
         // We are going the wrong way! Stop!
-        control->goDirection = current_direction + 180;
-        if (control->goDirection > 360)
+        control->go_direction = current_direction + 180;
+        if (control->go_direction > 360)
         {
-            control->goDirection -= 360;
+            control->go_direction -= 360;
         }
 
-        control->goMagnitude = current_speed;
+        control->go_magnitude = current_speed;
 
         ROS_ERROR_STREAM("STOPPING!!!");
     }
@@ -78,7 +78,7 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
         }
     }
 
-    control->goMagnitude = std::min(control->goMagnitude, shortest_distance);
+    control->go_magnitude = std::min(control->go_magnitude, shortest_distance);
 
     // TODO: Take into account the current movement
 

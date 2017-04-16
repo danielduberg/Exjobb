@@ -39,15 +39,15 @@ std::vector<cv::Point2f> ORM_left_bound_points_, ORM_right_bound_points_;
 void controlCallback(const exjobb_msgs::Control::ConstPtr & msg)
 {
     // Reversed because OpenCV...
-    control_.y = msg->goMagnitude * std::cos(msg->goDirection * PI / 180.0);
-    control_.x = msg->goMagnitude * std::sin(msg->goDirection * PI / 180.0);
+    control_.y = msg->go_magnitude * std::cos(msg->go_direction * PI / 180.0);
+    control_.x = msg->go_magnitude * std::sin(msg->go_direction * PI / 180.0);
 }
 
 void targetCallback(const exjobb_msgs::Control::ConstPtr & msg)
 {
     // Reversed because OpenCV...
-    target_.y = msg->goMagnitude * std::cos(msg->goDirection * PI / 180.0);
-    target_.x = msg->goMagnitude * std::sin(msg->goDirection * PI / 180.0);
+    target_.y = msg->go_magnitude * std::cos(msg->go_direction * PI / 180.0);
+    target_.x = msg->go_magnitude * std::sin(msg->go_direction * PI / 180.0);
 }
 
 void ORMCallback(const exjobb_msgs::ORM::ConstPtr & msg)

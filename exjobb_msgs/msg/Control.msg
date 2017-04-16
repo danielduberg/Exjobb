@@ -1,7 +1,7 @@
 Header header
-float32 goDirection
-float32 goMagnitude
-float32 lookDirection
+float32 go_direction
+float32 go_magnitude
+float32 look_direction
 float32 rotate
 bool lift
 bool land

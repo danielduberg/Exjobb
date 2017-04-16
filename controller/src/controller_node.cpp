@@ -71,9 +71,9 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg) {
 
     exjobb_msgs::Control control;
 
-    control.goDirection = getDirection(ls_upDown, -ls_leftRight);
-    control.goMagnitude = getDistanceFromOrigo(ls_upDown, ls_leftRight);
-    control.lookDirection = getDirection(rs_upDown, -rs_leftRight);
+    control.go_direction = getDirection(ls_upDown, -ls_leftRight);
+    control.go_magnitude = getDistanceFromOrigo(ls_upDown, ls_leftRight);
+    control.look_direction = getDirection(rs_upDown, -rs_leftRight);
     control.rotate = (std::fabs(r2 - 1.0) + (l2 - 1.0)) / 2.0;
     control.lift = (x_button == 1) ? true : false;
     control.land = (square_button == 1) ? true : false;
