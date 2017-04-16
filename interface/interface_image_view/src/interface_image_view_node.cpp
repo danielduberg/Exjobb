@@ -25,7 +25,7 @@ float look_direction_;
 float error_ = 0;
 
 void controlCallback(const exjobb_msgs::Control::ConstPtr & msg) {
-    look_direction_ = msg->lookDirection;
+    look_direction_ = msg->look_direction;
 }
 
 /**
