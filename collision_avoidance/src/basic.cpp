@@ -11,7 +11,7 @@ Basic::Basic(float radius, float security_distance)
 
 void Basic::avoidCollision(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed)
 {
-    if (control->goMagnitude == 0)
+    if (control->go_magnitude == 0)
     {
         // Stay in place
         stayInPlace(control, obstacles);
