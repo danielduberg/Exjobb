@@ -1,0 +1,64 @@
+<launch>
+	<arg name="all" default="true" />
+	
+	<arg name="stereo_1" default="true" if="$(arg all)" />
+	<arg name="stereo_2" default="true" if="$(arg all)" />
+	<arg name="stereo_3" default="true" if="$(arg all)" />
+	<arg name="stereo_4" default="true" if="$(arg all)" />
+	
+	<arg name="stereo_1" default="false" unless="$(arg all)" />
+	<arg name="stereo_2" default="false" unless="$(arg all)" />
+	<arg name="stereo_3" default="false" unless="$(arg all)" />
+	<arg name="stereo_4" default="false" unless="$(arg all)" />
+	
+	<arg name="manager" default="/stereo_nodelet_manager" /> <!-- Must be globally qualified -->
+	<node pkg="nodelet" type="nodelet" name="stereo_nodelet_manager"  args="manager"/>
+
+	<group if="$(arg stereo_1)">
+		<include file="$(find camera)/launch/nodelet_stereo_generic.launch" >
+			<arg name="stereo" value="1" />
+			<arg name="index_left" value="1" />
+			<arg name="index_right" value="0" />
+			<arg name="manager" value="$(arg manager)" />
+			<arg name="left_frame_rate" value="15" />
+			<arg name="right_frame_rate" value="10" />
+		</include>
+		<node name="stereo_1_broadcaster" pkg="tf" type="static_transform_publisher" args="0.103 0.02 0 -1.5707963268 0 -1.5707963268 /drone /stereo_1 100" />
+	</group>
+	
+	<group if="$(arg stereo_2)">
+		<include file="$(find camera)/launch/nodelet_stereo_generic.launch" >
+			<arg name="stereo" value="2" />
+			<arg name="index_left" value="3" />
+			<arg name="index_right" value="2" />
+			<arg name="manager" value="$(arg manager)" />
+			<arg name="left_frame_rate" value="15" />
+			<arg name="right_frame_rate" value="10" />
+		</include>
+		<node name="stereo_2_broadcaster" pkg="tf" type="static_transform_publisher" args="-0.018 0.069 0 0 0 -1.5707963268 /drone /stereo_2 100" />
+	</group>
+	
+	<group if="$(arg stereo_3)">
+		<include file="$(find camera)/launch/nodelet_stereo_generic.launch" >
+			<arg name="stereo" value="3" />
+			<arg name="index_left" value="5" />
+			<arg name="index_right" value="4" />
+			<arg name="manager" value="$(arg manager)" />
+			<arg name="left_frame_rate" value="10" />
+			<arg name="right_frame_rate" value="10" />
+		</include>
+		<node name="stereo_3_broadcaster" pkg="tf" type="static_transform_publisher" args="-0.103 -0.02 0 1.5707963268 0 -1.5707963268 /drone /stereo_3 100" />
+	</group>
+	
+	<group if="$(arg stereo_4)">
+		<include file="$(find camera)/launch/nodelet_stereo_generic.launch" >
+			<arg name="stereo" value="4" />
+			<arg name="index_left" value="7" />
+			<arg name="index_right" value="6" />
+			<arg name="manager" value="$(arg manager)" />
+			<arg name="left_frame_rate" value="15" />
+			<arg name="right_frame_rate" value="10" />
+		</include>
+		<node name="stereo_4_broadcaster" pkg="tf" type="static_transform_publisher" args="0.018 -0.069 0 3.14159265359 0 -1.5707963268 /drone /stereo_4 100" />
+	</group>
+</launch>

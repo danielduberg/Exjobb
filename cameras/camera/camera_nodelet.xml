@@ -1,0 +1,7 @@
+<library path="lib/libcamera_nodelet">
+	<class name="camera/camera" type="camera::CameraNodelet" base_class_type="nodelet::Nodelet">
+		<description>
+			A node that does camera.
+		</description>
+	</class>
+</library>

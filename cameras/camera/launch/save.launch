@@ -1,0 +1,8 @@
+<launch>
+    <arg name="record_cameras" default="true" />
+    <arg name="record_disparities" default="true" />
+
+    <node pkg="rosbag" type="record" name="rosbag_record_stereo_cameras" args="-o $(env HOME)/bagfiles/stereo_cameras /stereo_1/left/image_raw /stereo_1/left/camera_info /stereo_1/right/image_raw /stereo_1/right/camera_info /stereo_2/left/image_raw /stereo_2/left/camera_info /stereo_2/right/image_raw /stereo_2/right/camera_info /stereo_3/left/image_raw /stereo_3/left/camera_info /stereo_3/right/image_raw /stereo_3/right/camera_info /stereo_4/left/image_raw /stereo_4/left/camera_info /stereo_4/right/image_raw /stereo_4/right/camera_info" if="$(arg record_cameras)" />
+    
+    <node pkg="rosbag" type="record" name="rosbag_record_stereo_disparities" args="-o $(env HOME)/bagfiles/stereo_disparities /stereo_1/disparity /stereo_2/disparity /stereo_3/disparity /stereo_4/disparity" if="$(arg record_disparities)" />
+</launch>

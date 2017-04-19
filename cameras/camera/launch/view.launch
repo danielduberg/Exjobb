@@ -1,0 +1,49 @@
+<launch>
+	<arg name="all" default="true" />
+	
+	<arg name="stereo_1" default="true" if="$(arg all)" />
+	<arg name="stereo_2" default="true" if="$(arg all)" />
+	<arg name="stereo_3" default="true" if="$(arg all)" />
+	<arg name="stereo_4" default="true" if="$(arg all)" />
+	
+	<arg name="stereo_1" default="false" unless="$(arg all)" />
+	<arg name="stereo_2" default="false" unless="$(arg all)" />
+	<arg name="stereo_3" default="false" unless="$(arg all)" />
+	<arg name="stereo_4" default="false" unless="$(arg all)" />
+	
+	<group if="$(arg stereo_1)">
+		<node pkg="image_view" type="stereo_view" name="stereo_view_1">
+			<remap from="stereo" to="stereo_1" />
+			<remap from="image" to="image_rect_color" />
+			<param name="queue_size" value="2000" />
+			<param name="approximate_sync" value="True" />
+		</node>
+	</group>
+
+	<group if="$(arg stereo_2)">
+		<node pkg="image_view" type="stereo_view" name="stereo_view_2">
+			<remap from="stereo" to="stereo_2" />
+			<remap from="image" to="image_rect_color" />
+			<param name="queue_size" value="2000" />
+			<param name="approximate_sync" value="True" />
+		</node>
+	</group>
+	
+	<group if="$(arg stereo_3)">
+		<node pkg="image_view" type="stereo_view" name="stereo_view_3">
+			<remap from="stereo" to="stereo_3" />
+			<remap from="image" to="image_rect_color" />
+			<param name="queue_size" value="2000" />
+			<param name="approximate_sync" value="True" />
+		</node>
+	</group>
+	
+	<group if="$(arg stereo_4)">
+		<node pkg="image_view" type="stereo_view" name="stereo_view_4">
+			<remap from="stereo" to="stereo_4" />
+			<remap from="image" to="image_rect_color" />
+			<param name="queue_size" value="2000" />
+			<param name="approximate_sync" value="True" />
+		</node>
+	</group>
+</launch>
