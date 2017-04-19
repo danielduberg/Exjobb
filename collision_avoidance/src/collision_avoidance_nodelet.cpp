@@ -107,13 +107,51 @@ void CANodelet::sensorReadingsCallback(const exjobb_msgs::SensorReadings::ConstP
 
 void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr & msg)
 {
+    ROS_ERROR_STREAM("Current speed: " << current_speed_);
+
     exjobb_msgs::Control collisionFreeControl = *msg;
 
+    Point current;
+
+    current.x = current_speed_ * std::cos(current_direction_ * M_PI / 180.0);
+    current.y = current_speed_ * std::sin(current_direction_ * M_PI / 180.0);
+
+    float ab = 1000.0;
+    float T = 0.1;
+
+    std::vector<Point> obstacles;
+
+    for (size_t i = 0; i < obstacles_.size(); i++)
+    {
+        if (obstacles_[i].x == 0 && obstacles_[i].y == 0)
+        {
+            obstacles.push_back(obstacles_[i]);
+            continue;
+        }
+
+        float dobs = Point::getDistance(obstacles_[i]);
+
+        float deff = ab * (T * T) * (std::sqrt(1.0 + ((2 * dobs) / (ab * (T * T)))) - 1.0);
+
+        Point temp;
+        temp.x = deff * std::cos(current_direction_ * M_PI / 180.0);
+        temp.y = deff * std::sin(current_direction_ * M_PI / 180.0);
+
+        Point point;
+        point.x = deff * std::cos(Point::getDirection(obstacles_[i]));
+        point.y = deff * std::sin(Point::getDirection(obstacles_[i]));
+
+        // 10 hz
+        //point.x = obstacles_[i].x - (temp.x);
+        //point.y = obstacles_[i].y - (temp.y);
+        obstacles.push_back(point);
+    }
+
     // Call ORM
-    orm_->avoidCollision(&collisionFreeControl, obstacles_);
+    orm_->avoidCollision(&collisionFreeControl, obstacles);
 
     // Call validation
-    basic_->avoidCollision(&collisionFreeControl, obstacles_, current_direction_, current_speed_);
+    basic_->avoidCollision(&collisionFreeControl, obstacles, current_direction_, current_speed_);
 
     // Publish
 

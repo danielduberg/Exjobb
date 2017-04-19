@@ -605,7 +605,7 @@
 	
 	<include>
 		<uri>model://laser</uri>
-		<pose>0 0 -0.15 0 0 0</pose>
+		<pose>0 0 0.15 0 0 0</pose>
 	</include>
 	
 	<joint name='laser_joint' type='fixed'>

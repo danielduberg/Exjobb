@@ -98,8 +98,8 @@ void controlCallback(const exjobb_msgs::Control::ConstPtr & msg) {
     geometry_msgs::TwistStamped twist;
 
     // Linear
-    twist.twist.linear.x = 2 * msg->go_magnitude * std::cos(((msg->go_direction) * M_PI / 180.0) + yaw);
-    twist.twist.linear.y = 2 * msg->go_magnitude * std::sin(((msg->go_direction) * M_PI / 180.0) + yaw);
+    twist.twist.linear.x = msg->go_magnitude * std::cos(((msg->go_direction) * M_PI / 180.0) + yaw);
+    twist.twist.linear.y = msg->go_magnitude * std::sin(((msg->go_direction) * M_PI / 180.0) + yaw);
 
     if (current_pose.pose.position.z < 1) {
         if (1 - current_pose.pose.position.z < 0.1) {
@@ -110,7 +110,8 @@ void controlCallback(const exjobb_msgs::Control::ConstPtr & msg) {
     }
 
     // Angular
-    twist.twist.angular.z = -0.75 * msg->rotate;
+    // -0.75
+    twist.twist.angular.z = -0.5 * msg->rotate;
 
     cmdVelPub.publish(twist);
 }

@@ -13,7 +13,7 @@ struct Point {
     
     static Point getPointFromVector(float direction, float magnitude);
     
-    static Point getPointFromVectorDegrees(float direciton, float magnitude);
+    static Point getPointFromVectorDegrees(float direction, float magnitude);
     
     static void getVectorFromPoint(Point p, float & direction, float & magnitude);
     

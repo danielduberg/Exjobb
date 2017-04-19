@@ -32,6 +32,56 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
 
 void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed)
 {
+    float velocity_max_ = 2.0;
+
+    float closest_obstacle_distance = 1000;
+    for (size_t i = 0; i < obstacles.size(); i++)
+    {
+        if (obstacles[i].x == 0 && obstacles[i].y == 0)
+        {
+            continue;
+        }
+
+        float distance = Point::getDistance(obstacles[i]);
+
+        if (distance < closest_obstacle_distance)
+        {
+            closest_obstacle_distance = distance;
+        }
+    }
+
+    float direction_diff = std::fabs(current_direction - control->go_direction);
+
+    if (direction_diff > 180)
+    {
+        direction_diff = 360 - direction_diff;
+    }
+
+    control->go_magnitude = velocity_max_ * std::min(closest_obstacle_distance / ((radius_ + security_distance_) * 1.5f), control->go_magnitude);
+
+    Point current;
+
+    current.x = current_speed * std::cos(current_direction * M_PI / 180.0);
+    current.y = current_speed * std::sin(current_direction * M_PI / 180.0);
+
+    Point wanted;
+
+    wanted.x = control->go_magnitude * std::cos(control->go_direction * M_PI / 180.0);
+    wanted.y = control->go_magnitude * std::sin(control->go_direction * M_PI / 180.0);
+
+    //ROS_ERROR_STREAM("(" << current.x << ", " << current.y << "), (" << wanted.x << ", " << wanted.y << ")");
+
+    wanted.x = (wanted.x - current.x);
+    wanted.y = (wanted.y - current.y);
+
+    //ROS_ERROR_STREAM("(" << wanted.x << ", " << wanted.y << ")");
+
+    //ROS_ERROR_STREAM(control->go_direction << ", " << current_direction << " -> " << Point::GetDirectionDegrees(wanted));
+
+    control->go_magnitude = Point::getDistance(wanted);
+    control->go_direction = Point::GetDirectionDegrees(wanted);
+
+    /*
     float direction_epsilon = 40; // Five degrees
     float speed_epsilon = 0.2; // 0.2 meters per second?
 
@@ -80,6 +130,7 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
 
     control->go_magnitude = std::min(control->go_magnitude, shortest_distance);
 
+    */
     // TODO: Take into account the current movement
 
     // Create a rectangle of the path

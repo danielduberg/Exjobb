@@ -19,7 +19,7 @@ ORM::ORM(float radius, float security_distance, float epsilon)
     : radius_(radius)
     , security_distance_(security_distance)
     , epsilon_(epsilon)
-    , max_change_in_direction_(180)
+    , max_change_in_direction_(20)
 {
     ros::NodeHandle nh;
     pub_ = nh.advertise<exjobb_msgs::ORM>("orm", 10);
@@ -67,7 +67,7 @@ void ORM::getPointsOfInterest(const Point & goal, const std::vector<Point> & L, 
     int wanted_index = Point::GetDirectionDegrees(goal) / degree_per_index;
 
     // Only scan X number of degrees in both directions
-    float X = 90;
+    float X = 180;
     for (size_t i = 1; i * degree_per_index < X; i++)
     {
         for (int j = -1; j < 2; j += 2)
@@ -443,26 +443,26 @@ float ORM::motionComputation(const Point & goal, const std::vector<Point> & L)
 
         if (diff_left > 180 && diff_left < 360 && diff_right > 0 && diff_right < 180)
         {
-            ROS_ERROR_STREAM("Goal direction \t-\t1");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
+            //ROS_ERROR_STREAM("Goal direction \t-\t1");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
             return goal_direction;
         }
         else if (diff_right > 0 && diff_right < 180 && diff_right > diff_left)
         {
-            ROS_ERROR_STREAM("Left bound \t-\t1");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
+            //ROS_ERROR_STREAM("Left bound \t-\t1");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
             return left_bound;
         }
         else if (diff_left > 180 && diff_left < 360 && diff_right > diff_left)
         {
-            ROS_ERROR_STREAM("Right bound \t-\t1");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
+            //ROS_ERROR_STREAM("Right bound \t-\t1");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
             return right_bound;
         }
         else
         {
-            ROS_ERROR_STREAM("Mid \t-\t1");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
+            //ROS_ERROR_STREAM("Mid \t-\t1");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound << ", right_bound: " << right_bound);
             return getMidDirection(left_bound, right_bound);
         }
     }
@@ -482,14 +482,14 @@ float ORM::motionComputation(const Point & goal, const std::vector<Point> & L)
 
         if (diff_left > 180 && diff_left < 360)
         {
-            ROS_ERROR_STREAM("Goal direction \t-\t2");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound);
+            //ROS_ERROR_STREAM("Goal direction \t-\t2");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound);
             return goal_direction;
         }
         else
         {
-            ROS_ERROR_STREAM("Left bound \t-\t2");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound);
+            //ROS_ERROR_STREAM("Left bound \t-\t2");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", left_bound: " << left_bound);
             return left_bound;
         }
     }
@@ -509,14 +509,14 @@ float ORM::motionComputation(const Point & goal, const std::vector<Point> & L)
 
         if (diff_right > 0 && diff_right < 180)
         {
-            ROS_ERROR_STREAM("Goal direction \t-\t3");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", right_bound: " << right_bound);
+            //ROS_ERROR_STREAM("Goal direction \t-\t3");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", right_bound: " << right_bound);
             return goal_direction;
         }
         else
         {
-            ROS_ERROR_STREAM("Right bound \t-\t2");
-            ROS_ERROR_STREAM("Goal: " << goal_direction << ", right_bound: " << right_bound);
+            //ROS_ERROR_STREAM("Right bound \t-\t2");
+            //ROS_ERROR_STREAM("Goal: " << goal_direction << ", right_bound: " << right_bound);
             return right_bound;
         }
     }
@@ -524,8 +524,8 @@ float ORM::motionComputation(const Point & goal, const std::vector<Point> & L)
     {
         pub_.publish(msg);
 
-        ROS_ERROR_STREAM("Goal direction \t-\t4");
-        ROS_ERROR_STREAM("Goal: " << goal_direction);
+        //ROS_ERROR_STREAM("Goal direction \t-\t4");
+        //ROS_ERROR_STREAM("Goal: " << goal_direction);
         return goal_direction;
     }
 
@@ -853,8 +853,11 @@ Point ORM::subgoalSelector(const Point & prefered_goal, const std::vector<Point>
     ROS_FATAL_STREAM("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 
     // Did not find a subgoal
+    /*
     Point point;
     point.x = 0;
     point.y = 0;
     return point;
+    */
+    return prefered_goal;
 }

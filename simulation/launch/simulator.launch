@@ -15,8 +15,10 @@
 	</include>
 	
 	<include file="$(find px4)/launch/posix_sitl.launch">
+		<!--
         <env name="GAZEBO_IP" value="10.0.0.2" />
 	    <env name="GAZEBO_MASTER_URI" value="10.0.0.2:12345" />
+	    -->
 	    <arg name="headless" value="$(arg headless)"/>
         <arg name="gui" value="$(arg gui)"/>
         <arg name="world" value="$(arg world)" />
@@ -25,4 +27,6 @@
         <arg name="paused" value="$(arg paused)" />
         <arg name="sdf" value="$(arg sdf)" />
 	</include> 
+	
+	<node pkg="rqt_gui" type="rqt_gui" name="rqt_gui" args="--perspective-file $(find simulation)/launch/rqt/tele_operate.perspective" if="$(arg gui)"/>
 </launch>
