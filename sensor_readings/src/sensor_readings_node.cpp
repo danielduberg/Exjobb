@@ -161,7 +161,8 @@ void getSensors(ros::NodeHandle & nh, std::vector<Sensor *> & sensors, std::vect
     }
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     ros::init(argc, argv, "sensor_readings");
 
     ros::NodeHandle nh;
@@ -202,10 +203,9 @@ int main(int argc, char **argv) {
     nh_priv.param<float>("frequency", frequency, 100.0);
 
     ros::Rate rate(frequency);
-    while (ros::ok()) {
-        ROS_INFO_STREAM(sub_topics.size());
+    while (ros::ok())
+    {
         getSensors(nh, sensors, disparity_subs, sub_topics);
-        ROS_INFO_STREAM(sub_topics.size());
 
         ros::spinOnce();
 

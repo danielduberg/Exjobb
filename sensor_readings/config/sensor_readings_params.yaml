@@ -1,5 +1,5 @@
 min_distance: 0.2
-max_distance: 5.0
+max_distance: 2.0
 num_points: 0
 sub_topics: [ '/stereo_1/disparity', '/stereo_2/disparity', '/stereo_3/disparity', '/stereo_4/disparity' ]
 pub_topic: 'sensor_readings'

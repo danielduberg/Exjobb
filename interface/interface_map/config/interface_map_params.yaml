@@ -1,7 +1,7 @@
 width: 500
 height: 500
 
-pixels_per_meter: 75
+pixels_per_meter: 100
 
 obstacle_size: 5
 

@@ -1,0 +1,17 @@
+<launch>
+	
+	<include file="$(find control)/launch/control.launch" />
+	
+	<include file="$(find interface_map)/launch/interface_map.launch" /> 
+	
+	<!--
+	<include file="$(find interface_image_view)/launch/interface_image_view.launch" />
+    -->
+    
+	<include file="$(find sensor_readings)/launch/sensor_readings.launch" />
+	
+	<include file="$(find collision_avoidance)/launch/collision_avoidance_nodelet.launch" />
+	
+	<include file="$(find camera)/launch/nodelet_stereo_all.launch" />
+
+</launch>

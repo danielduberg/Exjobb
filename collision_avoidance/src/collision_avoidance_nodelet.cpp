@@ -107,7 +107,7 @@ void CANodelet::sensorReadingsCallback(const exjobb_msgs::SensorReadings::ConstP
 
 void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr & msg)
 {
-    ROS_ERROR_STREAM("Current speed: " << current_speed_);
+    //ROS_ERROR_STREAM("Current speed: " << current_speed_);
 
     exjobb_msgs::Control collisionFreeControl = *msg;
 

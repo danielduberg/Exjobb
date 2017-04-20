@@ -1,0 +1,4 @@
+# collision_free_control
+control_topic: "control"
+altitude: 1
+frequency: 20

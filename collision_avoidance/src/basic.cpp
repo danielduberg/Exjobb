@@ -26,7 +26,32 @@ void Basic::avoidCollision(exjobb_msgs::Control * control, const std::vector<Poi
 
 void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point> & obstacles)
 {
+    float x_min = 1000, y_min = 1000, x_max = -1000, y_max = -1000;
 
+    for (size_t i = 0; i < obstacles.size(); i++)
+    {
+        float distance = Point::getDistance(obstacles[i]);
+
+        if (distance <= radius_ + security_distance_)
+        {
+            Point point = Point::getPointFromVectorDegrees(Point::GetDirectionDegrees(obstacles[i]), radius_ + security_distance_);
+
+            x_min = std::min(x_min, point.x);
+
+            x_max = std::max(x_max, point.x);
+
+            y_min = std::min(y_min, point.y);
+
+            y_max = std::max(y_max, point.y);
+        }
+    }
+
+    Point go_to_point;
+    go_to_point.x = (x_min + x_max) / 2.0;
+    go_to_point.y = (y_min + y_max) / 2.0;
+
+    control->go_magnitude = Point::getDistance(go_to_point);            // TODO: Make it depend on the distance to the obstacles?
+    control->go_direction = Point::GetDirectionDegrees(go_to_point);
 }
 
 

@@ -1,7 +1,9 @@
 <launch>
+    <arg name="js" default="0" />
+
 	<node pkg="joy" type="joy_node" name="joy" required="True">
 		<param name="autorepeat_rate" value="100" /> <!-- Minimal update rate, Hz -->
-		<param name="dev" value="/dev/input/js1" />
+		<param name="dev" value="/dev/input/js$(arg js)" />
 	</node>
 	
 	<node pkg="controller" type="controller_node" name="controller" />

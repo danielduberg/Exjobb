@@ -8,35 +8,45 @@
 
 ros::Publisher pub;
 
-float getDirection(float x, float y) {
-    if (x == 0 && y == 0) {
+float look_direction = 0;
+
+bool turn_to_where_going = false;   // If we should turn so we always face where we are going
+int triangle_button_previus_state = 0;
+
+float getDirection(float x, float y)
+{
+    if (x == 0 && y == 0)
+    {
         return 0;
     }
+
     // 630 = 360 + 360 - 90
-    return std::fmod(((std::atan2(x, y) * 180 / PI) + 630), 360);
+    return std::fmod(round(((std::atan2(x, y) * 180.0 / PI) + 630.0)), 360.0);
 }
 
-float getDistanceFromOrigo(float x, float y) {
+float getDistanceFromOrigo(float x, float y)
+{
     return std::sqrt((x * x) + (y * y));
 }
 
-void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg) {
+void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg)
+{
     // Axes
-    float ls_leftRight = msg->axes[0]; // Left stick, Left-Right (Left = +, Right = -)
+    float ls_left_right = msg->axes[0]; // Left stick, Left-Right (Left = +, Right = -)
 
-    float ls_upDown = msg->axes[1]; // Left stick, Up-Down (Up = +, Down = -)
+    float ls_up_down = msg->axes[1]; // Left stick, Up-Down (Up = +, Down = -)
 
-    float rs_leftRight = msg->axes[2]; // Right stick, Left-Right (Left = +, Right = -)
+    float rs_left_right = msg->axes[2]; // Right stick, Left-Right (Left = +, Right = -)
 
-    float rs_upDown = msg->axes[5]; // Left stick, Up-Down (Up = +, Down = -)
+    float rs_up_down = msg->axes[5]; // Left stick, Up-Down (Up = +, Down = -)
 
     float l2 = msg->axes[3]; // Not pressed = 1, fully pressed = -1
 
     float r2 = msg->axes[4]; // Not pressed = 1, fully pressed = -1
 
-    float dpad_leftRight = msg->axes[6]; // Left = 1, Right -1, None = 0
+    int dpad_left_right = msg->axes[6]; // Left = 1, Right -1, None = 0
 
-    float dpad_upDown = msg->axes[7]; // Up = 1, Down -1, None = 0
+    int dpad_up_down = msg->axes[7]; // Up = 1, Down -1, None = 0
 
     // Buttons
     // Pressed = 1, not pressed = 0
@@ -68,15 +78,55 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg) {
 
     int touchpad_button = msg->buttons[13];
 
+    switch (dpad_left_right)
+    {
+    case 1:
+        look_direction = 90;    // Look to the left
+        break;
+    case -1:
+        look_direction = 270;   // Look to the right
+        break;
+    }
+
+    switch (dpad_up_down)
+    {
+    case 1:
+        look_direction = 0;     // Look forward
+        break;
+    case -1:
+        look_direction = 180;   // Look backwards
+        break;
+    }
+
+    // Only change state when button has been pressed
+    if (triangle_button != triangle_button_previus_state)
+    {
+        triangle_button_previus_state = triangle_button;
+
+        if (triangle_button == 1)
+        {
+            turn_to_where_going = !turn_to_where_going;
+        }
+    }
 
     exjobb_msgs::Control control;
 
-    control.go_direction = getDirection(ls_upDown, -ls_leftRight);
-    control.go_magnitude = getDistanceFromOrigo(ls_upDown, ls_leftRight);
-    control.look_direction = getDirection(rs_upDown, -rs_leftRight);
-    control.rotate = (std::fabs(r2 - 1.0) + (l2 - 1.0)) / 2.0;
+    control.go_direction = getDirection(ls_up_down, -ls_left_right);
+    control.go_magnitude = std::min(getDistanceFromOrigo(ls_up_down, ls_left_right), 1.0f);
+
+    if (getDistanceFromOrigo(rs_up_down, rs_left_right) == 0)
+    {
+        control.look_direction = look_direction;
+    }
+    else
+    {
+        control.look_direction = getDirection(rs_up_down, -rs_left_right);
+    }
+
+    control.rotate = (std::fabs(l2 - 1.0) + (r2 - 1.0)) / 2.0;
     control.lift = (x_button == 1) ? true : false;
     control.land = (square_button == 1) ? true : false;
+    control.turn_to_where_going = turn_to_where_going;
 
     control.header.stamp = ros::Time::now();
     control.header.frame_id = "Controller";
@@ -84,7 +134,8 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg) {
     pub.publish(control);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
     ros::init(argc, argv, "controller");
 
     ros::NodeHandle nh;

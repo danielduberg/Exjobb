@@ -3,7 +3,7 @@
 	<node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager"/>
 	
 	<node pkg="nodelet" type="nodelet" name="collision_avoidance_nodelet"
-		args="load collision_avoidance/CA nodelet_manager" output="screen">
+		args="load collision_avoidance/CA nodelet_manager" > <!-- output="screen"> -->
 		<rosparam file="$(find collision_avoidance)/config/collision_avoidance_params.yaml" command="load" />
 	</node>
 	

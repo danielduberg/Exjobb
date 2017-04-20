@@ -1,0 +1,9 @@
+<launch>
+
+    <include file="$(find controller)/launch/controller.launch">
+        <arg name="js" value="0" />
+    </include>
+
+    <node pkg="rqt_gui" type="rqt_gui" name="rqt_gui" args="--perspective-file $(find go)/launch/rqt/tele_operate.perspective" />
+
+</launch>
