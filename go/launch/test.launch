@@ -1,9 +1,11 @@
 <launch>
+	<arg name="js" default="0" />
+
 
     <include file="$(find control)/launch/control.launch" />
     
     <include file="$(find controller)/launch/controller.launch">
-        <arg name="js" value="0" />
+        <arg name="js" value="$(arg js)" />
     </include>
     
 </launch>

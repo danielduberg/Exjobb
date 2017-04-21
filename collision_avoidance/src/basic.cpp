@@ -30,11 +30,25 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
 
     for (size_t i = 0; i < obstacles.size(); i++)
     {
+        if (obstacles[i].x == 0 && obstacles[i].y == 0)
+        {
+            // Nothing here
+            continue;
+        }
+
         float distance = Point::getDistance(obstacles[i]);
 
         if (distance <= radius_ + security_distance_)
         {
-            Point point = Point::getPointFromVectorDegrees(Point::GetDirectionDegrees(obstacles[i]), radius_ + security_distance_);
+            float direction = Point::GetDirectionDegrees(obstacles[i]) + 180;
+            if (direction >= 360)
+            {
+                direction -= 360;
+            }
+
+            float magnitude = (radius_ + security_distance_) - distance;
+
+            Point point = Point::getPointFromVectorDegrees(direction, magnitude);
 
             x_min = std::min(x_min, point.x);
 
