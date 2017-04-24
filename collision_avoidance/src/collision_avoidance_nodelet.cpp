@@ -52,6 +52,8 @@ private:
     // Basic collision avoidance
     Basic * basic_;
 
+    float radius_, security_distance_;
+
     // Subscriptions
     ros::Subscriber sensor_readings_sub_, collision_avoidance_sub_, current_pose_sub_, current_velocity_sub_;
 
@@ -81,13 +83,13 @@ void CANodelet::onInit()
 
     collision_free_control_pub_ = nh.advertise<exjobb_msgs::Control>("collision_free_control", 10);
 
-    float radius, security_distance, epsilon;
-    priv_nh.param<float>("radius", radius, 0.25);
-    priv_nh.param<float>("security_distance", security_distance, 0.1);
+    float epsilon;
+    priv_nh.param<float>("radius", radius_, 0.25);
+    priv_nh.param<float>("security_distance", security_distance_, 0.1);
     priv_nh.param<float>("epsilon", epsilon, 0.1);
 
-    orm_ = new ORM(radius, security_distance, epsilon);
-    basic_ = new Basic(radius, security_distance);
+    orm_ = new ORM(radius_, security_distance_, epsilon);
+    basic_ = new Basic(radius_, security_distance_);
 }
 
 void CANodelet::sensorReadingsCallback(const exjobb_msgs::SensorReadings::ConstPtr & msg)
@@ -116,7 +118,7 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
     current.x = current_speed_ * std::cos(current_direction_ * M_PI / 180.0);
     current.y = current_speed_ * std::sin(current_direction_ * M_PI / 180.0);
 
-    float ab = 1000.0;
+    float ab = 3.0;
     float T = 0.1;
 
     std::vector<Point> obstacles;
@@ -131,15 +133,22 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
 
         float dobs = Point::getDistance(obstacles_[i]);
 
+        dobs -= radius_;
+
         float deff = ab * (T * T) * (std::sqrt(1.0 + ((2 * dobs) / (ab * (T * T)))) - 1.0);
+
+        deff += radius_;
 
         Point temp;
         temp.x = deff * std::cos(current_direction_ * M_PI / 180.0);
         temp.y = deff * std::sin(current_direction_ * M_PI / 180.0);
 
         Point point;
-        point.x = deff * std::cos(Point::getDirection(obstacles_[i]));
-        point.y = deff * std::sin(Point::getDirection(obstacles_[i]));
+        //point.x = deff * std::cos(Point::getDirection(obstacles_[i]));
+        //point.y = deff * std::sin(Point::getDirection(obstacles_[i]));
+        point.x = (dobs - deff) * std::cos(Point::getDirection(obstacles_[i]));
+        point.y = (dobs - deff) * std::sin(Point::getDirection(obstacles_[i]));
+
 
         // 10 hz
         //point.x = obstacles_[i].x - (temp.x);

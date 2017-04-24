@@ -8,4 +8,10 @@
         <arg name="js" value="$(arg js)" />
     </include>
     
+    <include file="$(find camera)/launch/nodelet_stereo_all.launch" />
+    
+    <include file="$(find sensor_readings)/launch/sensor_readings.launch" />
+    
+    <include file="$(find interface_map)/launch/interface_map.launch" /> 
+    
 </launch>

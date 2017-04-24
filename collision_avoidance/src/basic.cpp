@@ -14,7 +14,7 @@ void Basic::avoidCollision(exjobb_msgs::Control * control, const std::vector<Poi
     if (control->go_magnitude == 0)
     {
         // Stay in place
-        stayInPlace(control, obstacles);
+        stayInPlace(control, obstacles, current_direction, current_speed);
     }
     else
     {
@@ -24,7 +24,7 @@ void Basic::avoidCollision(exjobb_msgs::Control * control, const std::vector<Poi
 }
 
 
-void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point> & obstacles)
+void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed)
 {
     float x_min = 1000, y_min = 1000, x_max = -1000, y_max = -1000;
 
@@ -63,6 +63,14 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
     Point go_to_point;
     go_to_point.x = (x_min + x_max) / 2.0;
     go_to_point.y = (y_min + y_max) / 2.0;
+
+    Point current;
+
+    current.x = current_speed * std::cos(current_direction * M_PI / 180.0);
+    current.y = current_speed * std::sin(current_direction * M_PI / 180.0);
+
+    go_to_point.x = (go_to_point.x - current.x);
+    go_to_point.y = (go_to_point.y - current.y);
 
     control->go_magnitude = Point::getDistance(go_to_point);            // TODO: Make it depend on the distance to the obstacles?
     control->go_direction = Point::GetDirectionDegrees(go_to_point);

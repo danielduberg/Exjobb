@@ -1,6 +1,6 @@
 #include <ros/ros.h>
 
-#include "collision_avoidance/point.h"
+#include <collision_avoidance/point.h>
 
 #define PI 3.14159265
 
