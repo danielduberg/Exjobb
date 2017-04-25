@@ -121,6 +121,36 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
     float ab = 3.0;
     float T = 0.1;
 
+    /*
+    265 pixels
+    8 meter
+    110 pixels  -> 3.32 meter
+    35 pixels   -> 1.06 meter
+
+    145 pixels  -> 4.38 meter
+    1 meter = 33.125 pixels
+    39 pixels   -> 1.18 meter
+    38 pixels   -> 1.15 meter
+
+
+
+
+    248 pixels
+    4 meter
+    47 pixels   -> 0.76 meter
+    39 pixels   -> 0.63 meter
+
+    80 pixels   -> 1.29 meter
+    1 meter = 62 pixels
+    38 pixels   -> 0.61 meter
+    39 pixels   -> 0.63 meter
+
+      */
+
+
+    float dbreak = (current_speed_ * current_speed_) / (2.0 * ab);
+
+
     std::vector<Point> obstacles;
 
     for (size_t i = 0; i < obstacles_.size(); i++)
@@ -133,11 +163,11 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
 
         float dobs = Point::getDistance(obstacles_[i]);
 
-        dobs -= radius_;
+        //dobs -= radius_;
 
         float deff = ab * (T * T) * (std::sqrt(1.0 + ((2 * dobs) / (ab * (T * T)))) - 1.0);
 
-        deff += radius_;
+        //deff += radius_;
 
         Point temp;
         temp.x = deff * std::cos(current_direction_ * M_PI / 180.0);
@@ -146,8 +176,13 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
         Point point;
         //point.x = deff * std::cos(Point::getDirection(obstacles_[i]));
         //point.y = deff * std::sin(Point::getDirection(obstacles_[i]));
-        point.x = (dobs - deff) * std::cos(Point::getDirection(obstacles_[i]));
-        point.y = (dobs - deff) * std::sin(Point::getDirection(obstacles_[i]));
+
+        float distance = dobs - (2.0 * dbreak);
+        // Distance can min be the radius else it is inside the drone!
+        distance = std::max(radius_, distance);
+
+        point.x = distance * std::cos(Point::getDirection(obstacles_[i]));
+        point.y = distance * std::sin(Point::getDirection(obstacles_[i]));
 
 
         // 10 hz

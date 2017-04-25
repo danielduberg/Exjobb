@@ -60,6 +60,22 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
         }
     }
 
+    if (x_min == 1000 && y_min == 1000)
+    {
+        // There are no obstacles close
+        // Try to stop completely
+
+        float direction = current_direction + 180; // Opposite direction
+
+        if (direction >= 360)
+        {
+            direction -= 360;
+        }
+
+        control->go_magnitude = current_speed;
+        control->go_direction = direction;
+    }
+
     Point go_to_point;
     go_to_point.x = (x_min + x_max) / 2.0;
     go_to_point.y = (y_min + y_max) / 2.0;
