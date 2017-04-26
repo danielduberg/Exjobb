@@ -10,6 +10,8 @@ private:
     float radius_, security_distance_;
 
     void stayInPlace(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed);
+    
+    float getClosestObstacleDistanceBetweenDirections(const std::vector<Point> & obstacles, float current_direction, float wanted_direction);
 
     void moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed);
 

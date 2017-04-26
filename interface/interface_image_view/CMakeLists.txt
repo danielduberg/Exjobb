@@ -149,6 +149,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/interface_image_view_node.cpp src/image.cpp src/stitch.cpp)
 add_executable(extract_stitcher_images_node src/extract_stitcher_images.cpp src/image.cpp)
+add_executable(test_node src/test.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -160,6 +161,7 @@ add_executable(extract_stitcher_images_node src/extract_stitcher_images.cpp src/
 ## same as for the library above
 add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(extract_stitcher_images_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(test_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
@@ -167,6 +169,10 @@ target_link_libraries(${PROJECT_NAME}_node
   ${OpenCV_LIBS}
 )
 target_link_libraries(extract_stitcher_images_node
+  ${catkin_LIBRARIES}
+  ${OpenCV_LIBS}
+)
+target_link_libraries(test_node
   ${catkin_LIBRARIES}
   ${OpenCV_LIBS}
 )

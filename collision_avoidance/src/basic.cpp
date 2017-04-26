@@ -92,6 +92,35 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
     control->go_direction = Point::GetDirectionDegrees(go_to_point);
 }
 
+float Basic::getClosestObstacleDistanceBetweenDirections(const std::vector<Point> & obstacles, float current_direction, float wanted_direction)
+{
+    float left_direction, right_direction;
+
+    float direction_diff = current_direction - wanted_direction;
+    if (direction_diff > 180)
+    {
+        direction_diff -= 360;
+    }
+    else if (direction_diff < -180)
+    {
+        direction_diff += 360;
+    }
+
+    if (direction_diff < 0)
+    {
+        left_direction = wanted_direction;
+        right_direction = current_direction;
+    }
+    else
+    {
+        left_direction = current_direction;
+        right_direction = wanted_direction;
+    }
+
+    // We want left bound of left_direction and right bound of right_direction
+
+
+}
 
 void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed)
 {
@@ -134,8 +163,8 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
 
     //ROS_ERROR_STREAM("(" << current.x << ", " << current.y << "), (" << wanted.x << ", " << wanted.y << ")");
 
-    wanted.x = (wanted.x - current.x);
-    wanted.y = (wanted.y - current.y);
+    wanted.x += (wanted.x - current.x);
+    wanted.y += (wanted.y - current.y);
 
     //ROS_ERROR_STREAM("(" << wanted.x << ", " << wanted.y << ")");
 

@@ -850,7 +850,7 @@ Point ORM::subgoalSelector(const Point & prefered_goal, const std::vector<Point>
         }
     }
 
-    ROS_FATAL_STREAM("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+    //ROS_FATAL_STREAM("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 
     // Did not find a subgoal
     /*
