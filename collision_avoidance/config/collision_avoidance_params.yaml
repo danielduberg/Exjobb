@@ -1,4 +1,4 @@
 radius: 0.4
 # 0.4
-security_distance: 0.4
+security_distance: 0.5
 epsilon: 0.1

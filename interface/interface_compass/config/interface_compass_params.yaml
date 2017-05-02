@@ -1,0 +1,15 @@
+size: 300
+# Grey
+outside_color: [50, 50, 50]
+# Black
+background_color: [0, 0, 0]
+# White
+letter_color: [255, 255, 255]
+# White
+mark_color: [255, 255, 255]
+# Red
+arrow_color: [255, 0, 0]
+# 5% in pixels from edge
+letter_distance_from_edge: 0.05
+# Set to 0 equals max
+frequency: 10

@@ -14,9 +14,13 @@ public:
     
     cv::Stitcher stitcher_;
     
-    bool stitcher_ready_ = false;
+    bool stitcher_ready_;
     
     Image(std::string topic, float direction, float fov, std::string image_path);
+    
+    void configureStitcher();
+    
+    bool stitch(std::vector<cv::Mat> & images, cv::Mat * pano_image = NULL);
 
 	void callback(const sensor_msgs::Image::ConstPtr & msg);
 };

@@ -16,6 +16,7 @@ control_color: [ 255, 0, 0 ]
 target_color: [ 0, 0, 255 ]
 
 # ORM
+orm_debug: false
 # Purple
 ORM_goal_color: [ 153, 0, 153 ]
 # Yellow

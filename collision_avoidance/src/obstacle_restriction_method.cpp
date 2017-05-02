@@ -19,7 +19,7 @@ ORM::ORM(float radius, float security_distance, float epsilon)
     : radius_(radius)
     , security_distance_(security_distance)
     , epsilon_(epsilon)
-    , max_change_in_direction_(20)
+    , max_change_in_direction_(45)
 {
     ros::NodeHandle nh;
     pub_ = nh.advertise<exjobb_msgs::ORM>("orm", 10);
@@ -32,11 +32,9 @@ bool ORM::avoidCollision(exjobb_msgs::Control * control, const std::vector<Point
         return true;
     }
 
-    Point goal = initGoal(control->go_direction, 3);
-
     // A. The Subgoal Selector
     // TODO: FIX
-    goal = subgoalSelector(goal, obstacles);
+    Point goal = subgoalSelector(control->go_direction, obstacles);
 
     if (goal.x == 0 && goal.y == 0)
     {
@@ -783,8 +781,10 @@ float ORM::getMidDirection(float d1, float d2)
     return (mid_direction + 180);
 }
 
-Point ORM::subgoalSelector(const Point & prefered_goal, const std::vector<Point> & L)
+Point ORM::subgoalSelector(const float direction, const std::vector<Point> & L)
 {
+    Point prefered_goal = initGoal(direction, 3);
+
     if (isClearPath(prefered_goal, L))
     {
         //ROS_ERROR_STREAM("Clear path");
@@ -794,7 +794,7 @@ Point ORM::subgoalSelector(const Point & prefered_goal, const std::vector<Point>
 
     float degree_per_index = 360.0 / L.size();
 
-    int wanted_index = Point::GetDirectionDegrees(prefered_goal) / degree_per_index;
+    int wanted_index = direction / degree_per_index;
 
     // We cannot go where we "want" so find a subgoal
     // Look for subgoals close to wanted_direction
@@ -849,6 +849,20 @@ Point ORM::subgoalSelector(const Point & prefered_goal, const std::vector<Point>
             }
         }
     }
+
+    /*
+    for (float distance = 2.9; distance > radius_ + security_distance_; distance -= 0.1)
+    {
+        Point temp_goal = initGoal(direction, distance);
+
+        if (isClearPath(temp_goal, L))
+        {
+            //ROS_ERROR_STREAM("Clear path");
+            // We can go where we want
+            return temp_goal;
+        }
+    }
+    */
 
     //ROS_FATAL_STREAM("NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
 

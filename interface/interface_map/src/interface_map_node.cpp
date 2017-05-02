@@ -32,6 +32,8 @@ cv::Point2f ORM_goal_(0, 0);
 cv::Point2f ORM_left_bound_(0, 0);
 cv::Point2f ORM_right_bound_(0, 0);
 
+bool ORM_debug_;
+
 float ORM_radius_ = 0, ORM_security_distance_ = 0;
 float ORM_goal_size_, ORM_left_bound_size_, ORM_right_bound_size_, ORM_radius_size_;
 std::vector<cv::Point2f> ORM_left_bound_points_, ORM_right_bound_points_;
@@ -171,20 +173,24 @@ void sensorReadingCallback(const exjobb_msgs::SensorReadings::ConstPtr & msg) {
     cv::circle(map, center - (target_ * pixels_per_meter_), round(target_size_ / 2.0), target_color_, CV_FILLED);
 
     // Put the ORM points out!
-    cv::circle(map, center - (ORM_goal_ * pixels_per_meter_), round(ORM_goal_size_ / 2.0), ORM_goal_color_, CV_FILLED);
-    cv::circle(map, center - (ORM_left_bound_ * pixels_per_meter_), round(ORM_left_bound_size_ / 2.0), ORM_left_bound_color_, CV_FILLED);
-    cv::circle(map, center - (ORM_right_bound_ * pixels_per_meter_), round(ORM_right_bound_size_ / 2.0), ORM_right_bound_color_, CV_FILLED);
     cv::circle(map, center, round(ORM_radius_ * pixels_per_meter_), ORM_radius_color_, ORM_radius_size_);
-    cv::circle(map, center, round((ORM_radius_ + ORM_security_distance_) * pixels_per_meter_), ORM_radius_security_distance_color_, ORM_radius_size_);
-
-    for (size_t i = 0; i < ORM_left_bound_points_.size(); i++)
+    if (ORM_debug_)
     {
-        cv::circle(map, ORM_left_bound_points_[i], round(ORM_left_bound_size_ / 2.0), ORM_left_bound_color_, ORM_radius_size_);
-    }
+        cv::circle(map, center - (ORM_goal_ * pixels_per_meter_), round(ORM_goal_size_ / 2.0), ORM_goal_color_, CV_FILLED);
+        cv::circle(map, center - (ORM_left_bound_ * pixels_per_meter_), round(ORM_left_bound_size_ / 2.0), ORM_left_bound_color_, CV_FILLED);
+        cv::circle(map, center - (ORM_right_bound_ * pixels_per_meter_), round(ORM_right_bound_size_ / 2.0), ORM_right_bound_color_, CV_FILLED);
 
-    for (size_t i = 0; i < ORM_right_bound_points_.size(); i++)
-    {
-        cv::circle(map, ORM_right_bound_points_[i], round(ORM_right_bound_size_ / 2.0), ORM_right_bound_color_, ORM_radius_size_);
+        cv::circle(map, center, round((ORM_radius_ + ORM_security_distance_) * pixels_per_meter_), ORM_radius_security_distance_color_, ORM_radius_size_);
+
+        for (size_t i = 0; i < ORM_left_bound_points_.size(); i++)
+        {
+            cv::circle(map, ORM_left_bound_points_[i], round(ORM_left_bound_size_ / 2.0), ORM_left_bound_color_, ORM_radius_size_);
+        }
+
+        for (size_t i = 0; i < ORM_right_bound_points_.size(); i++)
+        {
+            cv::circle(map, ORM_right_bound_points_[i], round(ORM_right_bound_size_ / 2.0), ORM_right_bound_color_, ORM_radius_size_);
+        }
     }
 
     // Draw the robot!
@@ -223,6 +229,7 @@ void initParams(ros::NodeHandle & nh) {
 
     nh.param<float>("min_distance_between_obstacles", min_distance_between_obstacles_, 0.1);
 
+    nh.param<bool>("orm_debug", ORM_debug_, false);
     nh.param<float>("ORM_goal_size", ORM_goal_size_, 7);
     nh.param<float>("ORM_left_bound_size", ORM_left_bound_size_, 7);
     nh.param<float>("ORM_right_bound_size", ORM_right_bound_size_, 7);

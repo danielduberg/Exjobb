@@ -1,0 +1,6 @@
+#ifndef EXJOBB_COMMON_POINT
+#define EXJOBB_COMMON_POINT
+
+
+
+#endif // EXJOBB_COMMON_POINT

@@ -24,6 +24,8 @@
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2/LinearMath/Matrix3x3.h>
 
+#include <joy_rumble/Rumble_msg.h>
+
 # define M_PI           3.14159265358979323846  /* pi */
 
 namespace collision_avoidance
@@ -59,10 +61,13 @@ private:
 
     // Publications
     ros::Publisher collision_free_control_pub_;
+    ros::Publisher rumble_pub_;
 
     virtual void onInit();
 
     void sensorReadingsCallback(const exjobb_msgs::SensorReadings::ConstPtr & msg);
+
+    void hapticFeedback(float want_direction, float going_direction);
 
     void collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr & msg);
 
@@ -82,6 +87,7 @@ void CANodelet::onInit()
     current_velocity_sub_ = nh.subscribe("/mavros/local_position/velocity", 10, &CANodelet::currentVelocityCallback, this);
 
     collision_free_control_pub_ = nh.advertise<exjobb_msgs::Control>("collision_free_control", 10);
+    rumble_pub_ = nh.advertise<joy_rumble::Rumble_msg>("rumble_message", 1);
 
     float epsilon;
     priv_nh.param<float>("radius", radius_, 0.25);
@@ -107,6 +113,30 @@ void CANodelet::sensorReadingsCallback(const exjobb_msgs::SensorReadings::ConstP
     obstacles_ = newObstacles;
 }
 
+void CANodelet::hapticFeedback(float want_direction, float going_direction)
+{
+    float diff = want_direction - going_direction;
+
+    if (diff > 180)
+    {
+        diff -= 360;
+    }
+    else if (diff < -180)
+    {
+        diff += 360;
+    }
+
+    if (std::fabs(diff) > 70)
+    {
+        joy_rumble::Rumble_msg msg;
+        msg.length = 500;   // Half a second
+        msg.strong = 65535;
+        msg.weak = 65535;
+
+        rumble_pub_.publish(msg);
+    }
+}
+
 void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr & msg)
 {
     ROS_ERROR_STREAM("Current speed: " << current_speed_);
@@ -119,37 +149,9 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
     current.y = current_speed_ * std::sin(current_direction_ * M_PI / 180.0);
 
     float ab = 3.0;
-    float T = 0.1;
-
-    /*
-    265 pixels
-    8 meter
-    110 pixels  -> 3.32 meter
-    35 pixels   -> 1.06 meter
-
-    145 pixels  -> 4.38 meter
-    1 meter = 33.125 pixels
-    39 pixels   -> 1.18 meter
-    38 pixels   -> 1.15 meter
-
-
-
-
-    248 pixels
-    4 meter
-    47 pixels   -> 0.76 meter
-    39 pixels   -> 0.63 meter
-
-    80 pixels   -> 1.29 meter
-    1 meter = 62 pixels
-    38 pixels   -> 0.61 meter
-    39 pixels   -> 0.63 meter
-
-      */
-
+    float T = 0.3;
 
     float dbreak = (current_speed_ * current_speed_) / (2.0 * ab);
-
 
     std::vector<Point> obstacles;
 
@@ -161,28 +163,46 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
             continue;
         }
 
+        // Decrease the distance with 5 cm?!
         float dobs = Point::getDistance(obstacles_[i]);
 
-        //dobs -= radius_;
+        dobs -= radius_;
 
         float deff = ab * (T * T) * (std::sqrt(1.0 + ((2 * dobs) / (ab * (T * T)))) - 1.0);
 
-        //deff += radius_;
+        deff += radius_;
 
-        Point temp;
-        temp.x = deff * std::cos(current_direction_ * M_PI / 180.0);
-        temp.y = deff * std::sin(current_direction_ * M_PI / 180.0);
+        deff = std::min(Point::getDistance(obstacles_[i]), deff);
+        deff = std::max(deff, radius_ + 0.01f);
+
+        /*
+        float u = deff * std::cos(Point::getDirection(obstacles_[i]));
+        float v = deff * std::sin(Point::getDirection(obstacles_[i]));
+        float u2 = u * u;
+        float v2 = v * v;
+        float twosqrt2 = 2.0 * std::sqrt(2.0);
+        float subtermx = 2.0 + u2 - v2;
+        float subtermy = 2.0 - u2 + v2;
+        float termx1 = subtermx + u * twosqrt2;
+        float termx2 = subtermx - u * twosqrt2;
+        float termy1 = subtermy + v * twosqrt2;
+        float termy2 = subtermy - v * twosqrt2;
 
         Point point;
-        //point.x = deff * std::cos(Point::getDirection(obstacles_[i]));
-        //point.y = deff * std::sin(Point::getDirection(obstacles_[i]));
+        point.x = 0.5 * std::sqrt(termx1) - 0.5 * std::sqrt(termx2);
+        point.y = 0.5 * std::sqrt(termy1) - 0.5 * std::sqrt(termy2);
+        */
 
-        float distance = dobs - (2.0 * dbreak);
+        Point point;
+        point.x = deff * std::cos(Point::getDirection(obstacles_[i]));
+        point.y = deff * std::sin(Point::getDirection(obstacles_[i]));
+
+        //float distance = dobs - (2.0 * dbreak);
         // Distance can min be the radius else it is inside the drone!
-        distance = std::max(radius_, distance);
+        //distance = std::max(radius_, distance);
 
-        point.x = distance * std::cos(Point::getDirection(obstacles_[i]));
-        point.y = distance * std::sin(Point::getDirection(obstacles_[i]));
+        //point.x = distance * std::cos(Point::getDirection(obstacles_[i]));
+        //point.y = distance * std::sin(Point::getDirection(obstacles_[i]));
 
 
         // 10 hz
@@ -194,8 +214,13 @@ void CANodelet::collisionAvoidanceCallback(const exjobb_msgs::Control::ConstPtr 
     // Call ORM
     orm_->avoidCollision(&collisionFreeControl, obstacles);
 
+    //ROS_ERROR_STREAM("Want: " << msg->go_direction << ", get: " << collisionFreeControl.go_direction);
+
+    // TODO: Add code that checks if we should do haptic feedback
+    //hapticFeedback(msg->go_direction, collisionFreeControl.go_direction);
+
     // Call validation
-    basic_->avoidCollision(&collisionFreeControl, obstacles, current_direction_, current_speed_);
+    basic_->avoidCollision(&collisionFreeControl, obstacles, msg->go_direction, current_direction_, current_speed_);
 
     // Publish
 

@@ -7,7 +7,7 @@ project(interface_image_view)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-set(OpenCV_DIR /usr/share/OpenCV/)
+##set(OpenCV_DIR /usr/share/OpenCV/)
 find_package(catkin REQUIRED COMPONENTS
   cv_bridge
   image_transport
@@ -18,13 +18,14 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   exjobb_msgs
   controller
-  OpenCV
 )
 
-if( OpenCV_FOUND )
-list( APPEND ThirdParty_LIBS ${OpenCV_LIBS} )
-    include_directories( ${OpenCV_INCLUDE_DIRS} )
-endif( OpenCV_FOUND )
+find_package(OpenCV REQUIRED)
+
+##if( OpenCV_FOUND )
+##list( APPEND ThirdParty_LIBS ${OpenCV_LIBS} )
+##    include_directories( ${OpenCV_INCLUDE_DIRS} )
+##endif( OpenCV_FOUND )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -147,7 +148,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/interface_image_view_node.cpp src/image.cpp src/stitch.cpp)
+add_executable(${PROJECT_NAME}_node src/interface_image_view_node.cpp src/image.cpp )
 add_executable(extract_stitcher_images_node src/extract_stitcher_images.cpp src/image.cpp)
 add_executable(test_node src/test.cpp)
 
@@ -156,6 +157,9 @@ add_executable(test_node src/test.cpp)
 ## target back to the shorter version for ease of user use
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 # set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
+set_target_properties(${PROJECT_NAME}_node PROPERTIES COMPILE_FLAGS "-O3")
+set_target_properties(extract_stitcher_images_node PROPERTIES COMPILE_FLAGS "-O3")
+set_target_properties(test_node PROPERTIES COMPILE_FLAGS "-O3")
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -174,7 +178,7 @@ target_link_libraries(extract_stitcher_images_node
 )
 target_link_libraries(test_node
   ${catkin_LIBRARIES}
-  ${OpenCV_LIBS}
+  ${OpenCV_LIBRARIES}
 )
 
 #############

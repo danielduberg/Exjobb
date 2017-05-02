@@ -1,0 +1,6 @@
+<launch>
+
+	<rosparam file="$(find interface_image_view)/config/interface_image_view_params.yaml" command="load" />
+	<node pkg="interface_image_view" type="extract_stitcher_images_node" name="extract_stitcher_images_node" output="screen" />
+	
+</launch>

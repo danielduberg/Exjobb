@@ -7,4 +7,13 @@
 		<rosparam file="$(find collision_avoidance)/config/collision_avoidance_params.yaml" command="load" />
 	</node>
 	
+	
+
+	
+	<arg name="event_num" default="10" />
+
+    <node name="joy_rumble_node" pkg="joy_rumble" type="joy_rumble_node" output="screen" >
+    	<param name="event" type="str" value="/dev/input/event$(arg event_num)" />
+    </node>
+	
 </launch>

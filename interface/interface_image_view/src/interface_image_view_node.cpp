@@ -13,7 +13,6 @@
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/features2d/features2d.hpp"
-#include "opencv2/nonfree/features2d.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
 #include "opencv2/nonfree/nonfree.hpp"
@@ -93,6 +92,7 @@ void publish(const image_transport::Publisher & pub, const std::vector<Image *> 
     float leftDistance = getDirectionDistance(leftClosestImage->look_direction_, look_direction);
     float rightDistance = getDirectionDistance(rightClosestImage->look_direction_, look_direction);
 
+    /*
     if (std::fabs(leftDistance) < std::fabs(rightDistance)) {
         pub.publish(leftClosestImage->image_);
     } else {
@@ -100,8 +100,9 @@ void publish(const image_transport::Publisher & pub, const std::vector<Image *> 
     }
 
     return;
+    */
 
-    std::cout << leftDistance << ", " << rightDistance << std::endl;
+    //std::cout << leftDistance << ", " << rightDistance << std::endl;
 
     cv::Mat image;
 
@@ -120,19 +121,17 @@ void publish(const image_transport::Publisher & pub, const std::vector<Image *> 
         int leftNumPixelsRemove = std::fabs(leftDistance) * leftPixelsPerDegree;
         int rightNumPixelsRemove = std::fabs(rightDistance) * rightPixelsPerDegree;
 
-        std::vector<cv::Mat> stitchImages;
-        stitchImages.push_back(leftImage);
-        stitchImages.push_back(rightImage);
+        std::vector<cv::Mat> stitch_images;
+        stitch_images.push_back(leftImage);
+        stitch_images.push_back(rightImage);
 
-        cv::Stitcher::Status status = leftClosestImage->stitcher_.composePanorama(stitchImages, image);
-
-        image = image(cv::Rect(leftNumPixelsRemove, 0, image.cols - leftNumPixelsRemove - rightNumPixelsRemove, image.rows));
-
-        std::cout << status << std::endl;
-
-        if (cv::Stitcher::OK != status) {
+        if (!leftClosestImage->stitch(stitch_images, &image))
+        {
+            ROS_ERROR_STREAM("Could not stitch the images: " << leftClosestImage->topic_ << " and " << rightClosestImage->topic_);
             return;
         }
+
+        image = image(cv::Rect(leftNumPixelsRemove, 0, image.cols - leftNumPixelsRemove - rightNumPixelsRemove, image.rows));
     }
 
     sensor_msgs::Image::ConstPtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image).toImageMsg();
@@ -146,8 +145,6 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "interface_image_view");
 
     ros::NodeHandle nh;
-
-    cv::initModule_nonfree();
 
     image_transport::ImageTransport it(nh);
 
@@ -182,7 +179,7 @@ int main(int argc, char **argv) {
     nh.param<float>("wanted_fov", fov, 180);
 
     float frequency;
-    nh.param<float>("frequency", frequency, 100);
+    nh.param<float>("frequency", frequency, 10);
 
     ros::Rate rate(frequency);
     while (ros::ok()) {

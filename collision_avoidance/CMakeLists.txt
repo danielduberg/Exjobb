@@ -13,6 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   message_generation
   nodelet
+  exjobb_msgs
 )
 
 # C++11
