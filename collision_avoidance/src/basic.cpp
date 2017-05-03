@@ -9,8 +9,24 @@ Basic::Basic(float radius, float security_distance)
 
 }
 
-void Basic::avoidCollision(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed)
+void Basic::avoidCollision(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float wanted_direction, float current_direction, float current_speed)
 {
+    float diff_direction = control->go_direction - wanted_direction;
+
+    if (diff_direction > 180)
+    {
+        diff_direction -= 360;
+    }
+    else if (diff_direction < -180)
+    {
+        diff_direction += 360;
+    }
+
+    if (std::fabs(diff_direction) > 150)
+    {
+        control->go_magnitude = 0;
+    }
+
     if (control->go_magnitude == 0)
     {
         // Stay in place
@@ -19,7 +35,7 @@ void Basic::avoidCollision(exjobb_msgs::Control * control, const std::vector<Poi
     else
     {
         // We are moving
-        moving(control, obstacles, current_direction, current_speed);
+        moving(control, obstacles, wanted_direction, current_direction, current_speed);
     }
 }
 
@@ -72,7 +88,7 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
             direction -= 360;
         }
 
-        control->go_magnitude = current_speed;
+        control->go_magnitude = current_speed * 2;
         control->go_direction = direction;
     }
 
@@ -85,10 +101,10 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
     current.x = current_speed * std::cos(current_direction * M_PI / 180.0);
     current.y = current_speed * std::sin(current_direction * M_PI / 180.0);
 
-    go_to_point.x = (go_to_point.x - current.x);
-    go_to_point.y = (go_to_point.y - current.y);
+    go_to_point.x += (go_to_point.x - current.x);
+    go_to_point.y += (go_to_point.y - current.y);
 
-    control->go_magnitude = Point::getDistance(go_to_point);            // TODO: Make it depend on the distance to the obstacles?
+    control->go_magnitude = Point::getDistance(go_to_point) * 2;            // TODO: Make it depend on the distance to the obstacles?
     control->go_direction = Point::GetDirectionDegrees(go_to_point);
 }
 
@@ -122,9 +138,9 @@ float Basic::getClosestObstacleDistanceBetweenDirections(const std::vector<Point
 
 }
 
-void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed)
+void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float wanted_direction, float current_direction, float current_speed)
 {
-    float velocity_max_ = 2.0;
+    float velocity_max_ = 3.0;
 
     float closest_obstacle_distance = 1000;
     for (size_t i = 0; i < obstacles.size(); i++)
@@ -149,7 +165,7 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
         direction_diff = 360 - direction_diff;
     }
 
-    control->go_magnitude = velocity_max_ * std::min(closest_obstacle_distance / ((radius_ + security_distance_) * 1.5f), control->go_magnitude);
+    control->go_magnitude = velocity_max_ * std::min(closest_obstacle_distance / ((radius_ + security_distance_) * 2.0f), control->go_magnitude);
 
     Point current;
 
@@ -170,7 +186,7 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
 
     //ROS_ERROR_STREAM(control->go_direction << ", " << current_direction << " -> " << Point::GetDirectionDegrees(wanted));
 
-    control->go_magnitude = Point::getDistance(wanted);
+    //control->go_magnitude = Point::getDistance(wanted);
     control->go_direction = Point::GetDirectionDegrees(wanted);
 
     /*

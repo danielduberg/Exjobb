@@ -22,7 +22,7 @@ private:
 	
 	Point initGoal(float direction, float magnitude);
 	
-    Point subgoalSelector(const Point & prefered_goal, const std::vector<Point> & L);
+    Point subgoalSelector(float direction, const std::vector<Point> & L);
 	
     void findPotentialAB(const std::vector<Point> & L, const Point & goal, std::vector<Point> * A, std::vector<Point> * B);
 

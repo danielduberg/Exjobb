@@ -13,12 +13,12 @@ private:
     
     float getClosestObstacleDistanceBetweenDirections(const std::vector<Point> & obstacles, float current_direction, float wanted_direction);
 
-    void moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed);
+    void moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float wanted_direction, float current_direction, float current_speed);
 
 public:
     Basic(float radius, float security_distance);
 
-    void avoidCollision(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float current_direction, float current_speed);
+    void avoidCollision(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float wanted_direction, float current_direction, float current_speed);
 };
 
 #endif // BASIC_H

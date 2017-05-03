@@ -47,7 +47,6 @@ Image::Image(std::string topic, float direction, float fov, std::string image_pa
 
 void Image::configureStitcher()
 {
-
     //stitcher_.setRegistrationResol(1.0);
     //stitcher_.setCompositingResol(0.1);
     //stitcher_.setFeaturesFinder(new cv::detail::OrbFeaturesFinder(cv::Size(3,1),300));
@@ -63,7 +62,6 @@ void Image::configureStitcher()
     //stitcher_.setBlender(cv::detail::Blender::createDefault(cv::detail::Blender::NO, true));
     //stitcher_.setExposureCompensator(cv::detail::ExposureCompensator::createDefault(cv::detail::ExposureCompensator::NO));
     stitcher_.setExposureCompensator(new cv::detail::NoExposureCompensator());
-
 }
 
 bool Image::stitch(std::vector<cv::Mat> & images, cv::Mat * pano_image)

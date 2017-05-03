@@ -4,7 +4,7 @@
 
     <arg name="world" default="$(find simulation)/worlds/office.world"/>
     
-    <arg name="sdf" default="$(find simulation)/models/laser_drone/drone.sdf"/>
+    <arg name="sdf" default="$(find simulation)/models/laser_camera_drone/drone.sdf"/>
 
     <arg name="debug" default="false"/>
     <arg name="verbose" default="true"/>

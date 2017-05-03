@@ -64,6 +64,7 @@ int main(int argc, char **argv)
     //stitcher.setExposureCompensator(cv::detail::ExposureCompensator::createDefault(cv::detail::ExposureCompensator::NO));
     stitcher.setExposureCompensator(new cv::detail::NoExposureCompensator());
 
+
     cv::Mat pano_image;
     cv::Stitcher::Status status = stitcher.stitch(images, pano_image);
 

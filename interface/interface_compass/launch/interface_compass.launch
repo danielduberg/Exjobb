@@ -1,0 +1,7 @@
+<launch>
+	
+	<node pkg="interface_compass" type="interface_compass_node" name="interface_compass_node" output="screen">
+		<rosparam file="$(find interface_compass)/config/interface_compass_params.yaml" command="load" />
+	</node>
+	
+</launch>
