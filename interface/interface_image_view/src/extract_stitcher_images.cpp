@@ -17,7 +17,12 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
 
+#include "opencv2/core/version.hpp"
+#if CV_MAJOR_VERSION == 2
+#include <opencv2/stitching/stitcher.hpp>
+#elif CV_MAJOR_VERSION == 3
 #include <opencv2/stitching.hpp>
+#endif
 
 cv::Stitcher stitcher = cv::Stitcher::createDefault(true);
 

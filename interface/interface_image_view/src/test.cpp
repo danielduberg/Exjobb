@@ -7,8 +7,12 @@
 
 #include <cv_bridge/cv_bridge.h>
 
+#include "opencv2/core/version.hpp"
+#if CV_MAJOR_VERSION == 2
+#include <opencv2/stitching/stitcher.hpp>
+#elif CV_MAJOR_VERSION == 3
 #include <opencv2/stitching.hpp>
-#include <opencv2/core/version.hpp>
+#endif
 
 void imageCallback(const sensor_msgs::Image::ConstPtr & msg, cv::Mat * image)
 {

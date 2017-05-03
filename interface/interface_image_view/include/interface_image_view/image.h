@@ -2,7 +2,12 @@
 
 #include <sensor_msgs/Image.h>
 
+#include "opencv2/core/version.hpp"
+#if CV_MAJOR_VERSION == 2
+#include <opencv2/stitching/stitcher.hpp>
+#elif CV_MAJOR_VERSION == 3
 #include <opencv2/stitching.hpp>
+#endif
 
 class Image {
 public:
