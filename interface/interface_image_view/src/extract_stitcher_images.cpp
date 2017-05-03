@@ -14,12 +14,10 @@
 
 #include "opencv2/core/core.hpp"
 #include "opencv2/features2d/features2d.hpp"
-#include "opencv2/nonfree/features2d.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
-#include "opencv2/nonfree/nonfree.hpp"
 
-#include <opencv2/stitching/stitcher.hpp>
+#include <opencv2/stitching.hpp>
 
 cv::Stitcher stitcher = cv::Stitcher::createDefault(true);
 
@@ -86,8 +84,6 @@ int main(int argc, char **argv) {
     ros::init(argc, argv, "extract_stitcher_images");
 
     ros::NodeHandle nh;
-
-    cv::initModule_nonfree();
 
     image_transport::ImageTransport it(nh);
 

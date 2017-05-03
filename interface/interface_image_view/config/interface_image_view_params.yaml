@@ -1,7 +1,8 @@
 sub_topics: [ '/stereo_1/left/image_raw', '/stereo_2/left/image_raw', '/stereo_3/left/image_raw', '/stereo_4/left/image_raw' ]
 look_direction: [ 0, 90, 180, 270 ]
-image_fov: [ 109.4, 112.6, 112.6, 113 ]
+#image_fov: [ 109.4, 112.6, 112.6, 113 ]
+image_fov: [ 180.0, 180.0, 180.0, 180.0 ]
 image_path: [ 'images/camera_1', 'images/camera_2', 'images/camera_3', 'images/camera_4' ]
 publish_topic_name: 'interface_image_view'
-frequency: 100
-wanted_fov: 100
+frequency: 10
+wanted_fov: 180
