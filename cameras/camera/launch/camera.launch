@@ -1,0 +1,28 @@
+<launch>
+
+	<node pkg="nodelet" type="nodelet" name="nodelet_manager"  args="manager" output="screen" />
+
+	<node pkg="nodelet" type="nodelet" name="camera_nodelet"
+		args="load camera/camera nodelet_manager" output="screen">
+		<rosparam file="$(find camera)/config/camera_params.yaml" command="load" />
+	</node>
+	
+	<arg name="respawn" default="false" />
+
+	<arg     if="$(arg respawn)" name="bond" value="" />
+	<arg unless="$(arg respawn)" name="bond" value="--no-bond" />
+	
+	<group ns="stereo_1">
+		<group ns="flipped">
+			!-- Disparity image -->
+			<node pkg="nodelet" type="nodelet" name="disparity"
+			args="load stereo_image_proc/disparity /nodelet_manager $(arg bond)"
+			respawn="$(arg respawn)" output="screen">
+				<param name="queue_size" value="2000" />
+				<param name="approximate_sync" value="True" />
+				<param name="disparity_range" value="32" />
+			</node>
+		</group>
+	</group>
+	
+</launch>

@@ -1,0 +1,2 @@
+sub_topics: [ '/stereo_1' ]
+camera_info_urls: [ 'package://camera/config/stereo_1/flipped/' ]
