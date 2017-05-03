@@ -16,12 +16,13 @@
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/calib3d/calib3d.hpp"
 
-float look_direction_;
+float look_direction_, want_to_go_direction_, going_direction_;
 
 float error_ = 0;
 
 void controlCallback(const exjobb_msgs::Control::ConstPtr & msg) {
     look_direction_ = msg->look_direction;
+    want_to_go_direction_ = msg->go_direction;
 }
 
 /**
@@ -76,6 +77,37 @@ Image * getRightClosestImage(const std::vector<Image *> & images, float look_dir
     return images[index];
 }
 
+void putMarkers(cv::Mat * image, float look_direction, float fov)
+{
+    float min_angle = look_direction - (fov / 2.0);
+    if (min_angle < 0)
+    {
+        min_angle += 360;
+    }
+
+    float pixels_per_angle = image->cols / fov;
+
+    float angle_distance = getDirectionDistance(min_angle, want_to_go_direction_);
+
+    float want_to_go_pixel = pixels_per_angle * angle_distance;
+
+    if (want_to_go_pixel >= 0 && want_to_go_pixel < image->cols)
+    {
+        cv::circle(*image, cv::Point2i(want_to_go_pixel, image->cols / 2), image->cols / 10, cv::Scalar(255, 0, 150), 1, cv::INTER_LANCZOS4);
+    }
+
+
+
+    angle_distance = getDirectionDistance(min_angle, going_direction_);
+
+    want_to_go_pixel = pixels_per_angle * angle_distance;
+
+    if (want_to_go_pixel >= 0 && want_to_go_pixel < image->cols)
+    {
+        cv::circle(*image, cv::Point2i(want_to_go_pixel, image->cols / 2), image->cols / 10, cv::Scalar(150, 255, 0), 1, cv::INTER_LANCZOS4);
+    }
+}
+
 void publish(const image_transport::Publisher & pub, const std::vector<Image *> & images, float fov, float look_direction, ros::Publisher & view_pub) {
     for (size_t i = 0; i < images.size(); i++) {
         if (images[i]->image_.data.size() == 0) {
@@ -88,18 +120,6 @@ void publish(const image_transport::Publisher & pub, const std::vector<Image *> 
 
     float leftDistance = getDirectionDistance(leftClosestImage->look_direction_, look_direction);
     float rightDistance = getDirectionDistance(rightClosestImage->look_direction_, look_direction);
-
-    /*
-    if (std::fabs(leftDistance) < std::fabs(rightDistance)) {
-        pub.publish(leftClosestImage->image_);
-    } else {
-        pub.publish(rightClosestImage->image_);
-    }
-
-    return;
-    */
-
-    //std::cout << leftDistance << ", " << rightDistance << std::endl;
 
     cv::Mat image;
 
@@ -131,9 +151,9 @@ void publish(const image_transport::Publisher & pub, const std::vector<Image *> 
         image = image(cv::Rect(leftNumPixelsRemove, 0, image.cols - leftNumPixelsRemove - rightNumPixelsRemove, image.rows));
 
         cv::resize(image, image, cv::Size(), leftImage.cols / (float) image.cols, leftImage.rows / (float) image.rows, cv::INTER_LANCZOS4);
-
-        ROS_ERROR_STREAM(image.cols << "x" << image.rows);
     }
+
+    putMarkers(&image, look_direction, fov);
 
     sensor_msgs::Image::ConstPtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image).toImageMsg();
 
