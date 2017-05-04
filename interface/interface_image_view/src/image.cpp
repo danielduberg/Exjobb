@@ -14,13 +14,19 @@ Image::Image(std::string topic, float direction, float fov, std::string image_pa
     , fov_(fov)
     , stitcher_(cv::Stitcher::createDefault(false))
     , stitcher_ready_(false)
+    , image_path_(image_path)
     {
 
     configureStitcher();
 
+    initStitcher();
+}
+
+void Image::initStitcher()
+{
     std::vector<cv::Mat> images;
 
-    std::string path = ros::package::getPath("interface_image_view") + "/" + image_path;
+    std::string path = ros::package::getPath("interface_image_view") + "/" + image_path_;
 
     cv::Mat image = cv::imread(path + "/left.png", CV_LOAD_IMAGE_UNCHANGED);   // Read the file
 
@@ -42,7 +48,7 @@ Image::Image(std::string topic, float direction, float fov, std::string image_pa
 
     images.push_back(image);
 
-    //stitch(images);
+    stitch(images);
 }
 
 void Image::configureStitcher()
@@ -101,4 +107,16 @@ bool Image::stitch(std::vector<cv::Mat> & images, cv::Mat * pano_image)
 
 void Image::callback(const sensor_msgs::Image::ConstPtr & msg) {
     image_ = *msg;
+}
+
+bool Image::isStitcherReady()
+{
+    return stitcher_ready_;
+}
+
+void Image::reset()
+{
+    stitcher_ready_ = false;
+
+    initStitcher();
 }

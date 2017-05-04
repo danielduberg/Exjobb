@@ -10,6 +10,13 @@
 #endif
 
 class Image {
+private:
+    cv::Stitcher stitcher_;
+
+    bool stitcher_ready_;
+    
+    std::string image_path_;
+
 public:
 	sensor_msgs::Image image_;
 	
@@ -17,15 +24,17 @@ public:
 	
     const float look_direction_, fov_;
     
-    cv::Stitcher stitcher_;
-    
-    bool stitcher_ready_;
-    
     Image(std::string topic, float direction, float fov, std::string image_path);
+    
+    void initStitcher();
     
     void configureStitcher();
     
     bool stitch(std::vector<cv::Mat> & images, cv::Mat * pano_image = NULL);
 
 	void callback(const sensor_msgs::Image::ConstPtr & msg);
+	
+	bool isStitcherReady();
+	
+	void reset();
 };

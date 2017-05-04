@@ -93,7 +93,7 @@ void putMarkers(cv::Mat * image, float look_direction, float fov)
 
     if (want_to_go_pixel >= 0 && want_to_go_pixel < image->cols)
     {
-        cv::circle(*image, cv::Point2i(want_to_go_pixel, image->cols / 2), (image->rows < image->cols ? image->rows : image->cols) / 10, cv::Scalar(255, 0, 150), 1, cv::INTER_LANCZOS4);
+        cv::circle(*image, cv::Point2i(image->cols - want_to_go_pixel, image->rows / 2), (image->rows < image->cols ? image->rows : image->cols) / 40, cv::Scalar(255, 0, 150), 1, cv::INTER_LANCZOS4);
     }
 
 
@@ -104,7 +104,7 @@ void putMarkers(cv::Mat * image, float look_direction, float fov)
 
     if (want_to_go_pixel >= 0 && want_to_go_pixel < image->cols)
     {
-        cv::circle(*image, cv::Point2i(want_to_go_pixel, image->cols / 2), (image->rows < image->cols ? image->rows : image->cols) / 10, cv::Scalar(150, 255, 0), 1, cv::INTER_LANCZOS4);
+        cv::circle(*image, cv::Point2i(image->cols - want_to_go_pixel, image->rows / 2), (image->rows < image->cols ? image->rows : image->cols) / 40, cv::Scalar(150, 255, 0), 1, cv::INTER_LANCZOS4);
     }
 }
 

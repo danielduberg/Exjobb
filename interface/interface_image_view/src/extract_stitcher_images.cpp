@@ -24,18 +24,14 @@
 #include <opencv2/stitching.hpp>
 #endif
 
-cv::Stitcher stitcher = cv::Stitcher::createDefault(true);
-
-std::vector<bool> haveStitched(4, false);
-
-void extract(const std::vector<Image *> & images, std::vector<std::string> & image_path) {
+bool extract(const std::vector<Image *> & images, std::vector<std::string> & image_path, std::vector<bool> & have_stitched) {
     for (size_t i = 0; i < images.size(); i++) {
-        if (images[i]->stitcher_ready_) {
-            haveStitched[i] = true;
+        if (images[i]->isStitcherReady()) {
+            have_stitched[i] = true;
         }
 
         if (images[i]->image_.data.size() == 0) {
-            return;
+            return false;
         }
     }
 
@@ -46,11 +42,11 @@ void extract(const std::vector<Image *> & images, std::vector<std::string> & ima
         allImages.push_back(cv_bridge::toCvCopy(images[2]->image_, "bgr8")->image);
         allImages.push_back(cv_bridge::toCvCopy(images[3]->image_, "bgr8")->image);
     } catch (cv_bridge::Exception & e) {
-        return;
+        return false;
     }
 
     for (size_t i = 0; i < allImages.size(); i++) {
-        if (!haveStitched[i]) {
+        if (!have_stitched[i]) {
             std::vector<cv::Mat> image;
             image.push_back(allImages[i]);
             if (i == 0) {
@@ -59,30 +55,28 @@ void extract(const std::vector<Image *> & images, std::vector<std::string> & ima
                 image.push_back(allImages[i - 1]);
             }
 
-            cv::Stitcher::Status status = stitcher.estimateTransform(image);
+            if (images[i]->stitch(image, NULL)) {
+                std::cout << image_path[i] << " succeeded" << std::endl;
 
-            if (cv::Stitcher::OK == status) {
-                std::cout << image_path[i] << " succeeded: " << status << std::endl;
-
-                haveStitched[i] = true;
+                have_stitched[i] = true;
 
                 std::string path = ros::package::getPath("interface_image_view") + "/" + image_path[i];
 
                 cv::imwrite(path + "/left.png", image[0]);
                 cv::imwrite(path + "/right.png", image[1]);
             } else {
-                std::cout << image_path[i] << " failed: " << status << std::endl;
+                std::cout << image_path[i] << " failed" << std::endl;
             }
         }
     }
 
-    for (size_t i = 0; i < haveStitched.size(); i++) {
-        if (!haveStitched[i]) {
-            return;
+    for (size_t i = 0; i < have_stitched.size(); i++) {
+        if (!have_stitched[i]) {
+            return false;
         }
     }
 
-    std::exit(1);
+    return true;
 }
 
 int main(int argc, char **argv) {
@@ -103,6 +97,8 @@ int main(int argc, char **argv) {
 
     std::vector<Image *> images;
 
+    std::vector<bool> have_stitched(sub_topics.size(), false);
+
     image_transport::Subscriber image_subs[sub_topics.size()];
 
     for (size_t i = 0; i < sub_topics.size(); i++) {
@@ -118,7 +114,28 @@ int main(int argc, char **argv) {
     while (ros::ok()) {
         ros::spinOnce();
 
-        extract(images, image_path);
+        if (extract(images, image_path, have_stitched))
+        {
+            // Double check so everything is working from a fresh start!
+
+            bool isDone = true;
+
+            for (size_t i = 0; i < images.size(); i++)
+            {
+                images[i]->reset();
+
+                if (!images[i]->isStitcherReady())
+                {
+                    have_stitched[i] = false;
+                    isDone = false;
+                }
+            }
+
+            if (isDone)
+            {
+                break;
+            }
+        }
 
         rate.sleep();
     }

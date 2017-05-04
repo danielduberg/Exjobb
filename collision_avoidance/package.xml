@@ -46,12 +46,14 @@
   <build_depend>message_generation</build_depend>
   <build_depend>nodelet</build_depend>
   <build_depend>exjobb_msgs</build_depend>
+  <build_depend>joy_rumble</build_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>message_runtime</run_depend>
   <run_depend>nodelet</run_depend>
   <run_depend>exjobb_msgs</run_depend>
+  <run_depend>joy_rumble</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
