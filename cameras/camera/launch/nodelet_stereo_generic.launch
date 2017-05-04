@@ -14,7 +14,7 @@
 	<arg name="left_frame_rate" default="15" />
 	<arg name="right_frame_rate" default="10" />
 	<arg name="timestamp_method" value="start" />
-	<arg name="camera_info_url" value="file://$(find libuvc_camera)/config/stereo_$(arg stereo)" />
+	<arg name="camera_info_url" value="file://$(find camera)/config/stereo_$(arg stereo)" />
 	<arg name="auto_exposure" value="3" />
 	<arg name="auto_white_balance" value="false" />
 	<arg name="frame_id" value="stereo_$(arg stereo)" />
