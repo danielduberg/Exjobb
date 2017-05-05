@@ -114,14 +114,16 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg)
     control.go_direction = getDirection(ls_up_down, -ls_left_right);
     control.go_magnitude = std::min(getDistanceFromOrigo(ls_up_down, ls_left_right), 1.0f);
 
-    if (getDistanceFromOrigo(rs_up_down, rs_left_right) == 0)
+    if (getDistanceFromOrigo(rs_up_down, rs_left_right) > 0.1)
     {
-        control.look_direction = look_direction;
+        look_direction = getDirection(rs_up_down, -rs_left_right);
     }
-    else
+    else if (getDistanceFromOrigo(ls_up_down, ls_left_right) > 0.1)
     {
-        control.look_direction = getDirection(rs_up_down, -rs_left_right);
+        look_direction = getDirection(ls_up_down, -ls_left_right);
     }
+
+    control.look_direction = look_direction;
 
     control.rotate = (std::fabs(l2 - 1.0) + (r2 - 1.0)) / 2.0;
     control.lift = (x_button == 1) ? true : false;
