@@ -1,3 +1,0 @@
-[submodule "submodules/joy_rumble"]
-	path = submodules/joy_rumble
-	url = git@github.com:Flos/ros-joy_rumble.git
