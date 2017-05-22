@@ -36,19 +36,47 @@ void poseCallback(const geometry_msgs::PoseStamped::ConstPtr & msg)
     current_pose = *msg;
 }
 
-void land()
+void arm_disarm(bool arm)
 {
-    // Disarm
-    mavros_msgs::CommandBool disarm_cmd;
-    disarm_cmd.request.value = false;
+    mavros_msgs::CommandBool arm_cmd;
+    arm_cmd.request.value = arm;
 
-    if (arming_client.call(disarm_cmd) && disarm_cmd.response.success)
+    if (arming_client.call(arm_cmd) && arm_cmd.response.success)
     {
-        ROS_INFO_STREAM_THROTTLE(1, "Vehicle disarmed");
+        if (arm)
+        {
+            ROS_INFO_STREAM_THROTTLE(1, "Vehicle armed");
+        }
+        else
+        {
+            ROS_INFO_STREAM_THROTTLE(1, "Vehicle disarmed");
+        }
     }
     else
     {
-        ROS_ERROR_STREAM_THROTTLE(1, "Could not disarm vehicle");
+        if (arm)
+        {
+            ROS_ERROR_STREAM_THROTTLE(1, "Could not arm vehicle");
+        }
+        else
+        {
+            ROS_ERROR_STREAM_THROTTLE(1, "Could not disarm vehicle");
+        }
+    }
+}
+
+void land()
+{
+    mavros_msgs::SetMode set_mode;
+    set_mode.request.custom_mode = "AUTO.LAND";   // Makes it land
+
+    if (set_mode_client.call(set_mode) && set_mode.response.success)
+    {
+        ROS_INFO_STREAM_THROTTLE(1, "Starting to land");
+    }
+    else
+    {
+        ROS_ERROR_STREAM_THROTTLE(1, "Could not land");
     }
 }
 
@@ -63,23 +91,6 @@ void lift()
         local_pos_pub.publish(pose);
     }
 
-    if (!current_state.armed)
-    {
-        // Arm
-        mavros_msgs::CommandBool arm_cmd;
-        arm_cmd.request.value = true;
-
-        if (arming_client.call(arm_cmd) && arm_cmd.response.success)
-        {
-            ROS_INFO_STREAM_THROTTLE(1, "Vehicle armed");
-        }
-        else
-        {
-            ROS_ERROR_STREAM_THROTTLE(1, "Could not arm vehicle");
-            return;
-        }
-    }
-
     if (current_state.mode != "OFFBOARD")
     {
         mavros_msgs::SetMode set_mode;
@@ -87,11 +98,11 @@ void lift()
 
         if (set_mode_client.call(set_mode) && set_mode.response.success)
         {
-            ROS_INFO_STREAM_THROTTLE(1, "Offboard enabled");
+            ROS_INFO_STREAM_THROTTLE(1, "Offboard mode enabled");
         }
         else
         {
-            ROS_ERROR_STREAM_THROTTLE(1, "Could not enable offboard");
+            ROS_ERROR_STREAM_THROTTLE(1, "Could not enable offboard mode");
             return;
         }
     }
@@ -123,6 +134,8 @@ void fly(float go_direction, float go_magnitude, float rotate, bool turn_to_wher
         {
             twist.twist.linear.z = 0.3;
         }
+
+        twist.twist.linear.z = std::max(0.0, 0.4 * (1.0 - (current_pose.pose.position.z / altitude)));
     }
 
     if (turn_to_where_going && rotate == 0 && go_magnitude != 0)
@@ -161,7 +174,15 @@ void fly(float go_direction, float go_magnitude, float rotate, bool turn_to_wher
 
 void controlCallback(const exjobb_msgs::Control::ConstPtr & msg)
 {
-    if (msg->land)
+    if (msg->disarm)
+    {
+        arm_disarm(false);
+    }
+    else if (msg->arm)
+    {
+        arm_disarm(true);
+    }
+    else if (msg->land)
     {
         land();
     }

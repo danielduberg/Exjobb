@@ -11,7 +11,8 @@ ros::Publisher pub;
 float look_direction = 0;
 
 bool turn_to_where_going = false;   // If we should turn so we always face where we are going
-int triangle_button_previus_state = 0;
+int triangle_button_previous_state = 0;
+int option_button_previous_state = 0;
 
 float getDirection(float x, float y)
 {
@@ -68,7 +69,7 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg)
 
     int share_button = msg->buttons[8];
 
-    int start_button = msg->buttons[9];
+    int option_button = msg->buttons[9];
 
     int ls_button = msg->buttons[10];
 
@@ -99,15 +100,27 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg)
     }
 
     // Only change state when button has been pressed
-    if (triangle_button != triangle_button_previus_state)
+    if (triangle_button != triangle_button_previous_state)
     {
-        triangle_button_previus_state = triangle_button;
+        triangle_button_previous_state = triangle_button;
 
         if (triangle_button == 1)
         {
             turn_to_where_going = !turn_to_where_going;
         }
     }
+
+    // Only arm/disarm when button has been pressed
+    /*
+    if (option_button != option_button_previous_state)
+    {
+        option_button_previous_state = option_button;
+    }
+    else
+    {
+        option_button = 0;  // So we can hold the button down for a while without it having an affect
+    }
+    */
 
     exjobb_msgs::Control control;
 
@@ -123,12 +136,21 @@ void controllerCallback(const sensor_msgs::Joy::ConstPtr & msg)
         look_direction = getDirection(ls_up_down, -ls_left_right);
     }
 
-    control.look_direction = look_direction;
+    if (getDistanceFromOrigo(rs_up_down, rs_left_right) == 0)
+    {
+        control.look_direction = look_direction;
+    }
+    else
+    {
+        control.look_direction = getDirection(rs_up_down, -rs_left_right);
+    }
 
     control.rotate = (std::fabs(l2 - 1.0) + (r2 - 1.0)) / 2.0;
     control.lift = (x_button == 1) ? true : false;
     control.land = (square_button == 1) ? true : false;
     control.turn_to_where_going = turn_to_where_going;
+    control.arm = (option_button == 1) ? true : false;
+    control.disarm = (share_button == 1) ? true : false;
 
     control.header.stamp = ros::Time::now();
     control.header.frame_id = "Controller";

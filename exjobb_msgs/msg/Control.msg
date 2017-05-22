@@ -6,3 +6,5 @@ float32 rotate
 bool lift
 bool land
 bool turn_to_where_going
+bool arm
+bool disarm

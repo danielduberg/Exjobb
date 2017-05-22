@@ -140,7 +140,7 @@ float Basic::getClosestObstacleDistanceBetweenDirections(const std::vector<Point
 
 void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float wanted_direction, float current_direction, float current_speed)
 {
-    float velocity_max_ = 3.0;
+    float velocity_max_ = 1.0;
 
     float closest_obstacle_distance = 1000;
     for (size_t i = 0; i < obstacles.size(); i++)
