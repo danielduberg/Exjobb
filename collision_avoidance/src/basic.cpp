@@ -2,9 +2,10 @@
 
 #include <collision_avoidance/basic.h>
 
-Basic::Basic(float radius, float security_distance)
+Basic::Basic(float radius, float security_distance, float min_distance_hold)
     : radius_(radius)
     , security_distance_(security_distance)
+    , min_distance_hold_(min_distance_hold)
 {
 
 }
@@ -54,7 +55,7 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
 
         float distance = Point::getDistance(obstacles[i]);
 
-        if (distance <= radius_ + security_distance_)
+        if (distance <= radius_ + min_distance_hold_)
         {
             float direction = Point::GetDirectionDegrees(obstacles[i]) + 180;
             if (direction >= 360)
@@ -62,7 +63,7 @@ void Basic::stayInPlace(exjobb_msgs::Control * control, const std::vector<Point>
                 direction -= 360;
             }
 
-            float magnitude = (radius_ + security_distance_) - distance;
+            float magnitude = (radius_ + min_distance_hold_) - distance;
 
             Point point = Point::getPointFromVectorDegrees(direction, magnitude);
 
@@ -138,6 +139,8 @@ float Basic::getClosestObstacleDistanceBetweenDirections(const std::vector<Point
 
 }
 
+// Take the speed control from VFH. V' = v_max * max(1, d_closest / d_empirically_determined) and then V = V' * (1 - (steering_angle / max_steering_angle) + v_min
+
 void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & obstacles, float wanted_direction, float current_direction, float current_speed)
 {
     float velocity_max_ = 1.0;
@@ -165,7 +168,7 @@ void Basic::moving(exjobb_msgs::Control * control, const std::vector<Point> & ob
         direction_diff = 360 - direction_diff;
     }
 
-    control->go_magnitude = velocity_max_ * std::min(closest_obstacle_distance / ((radius_ + security_distance_) * 2.0f), control->go_magnitude);
+    control->go_magnitude = velocity_max_ * std::min(closest_obstacle_distance / (radius_ + security_distance_), control->go_magnitude);
 
     Point current;
 

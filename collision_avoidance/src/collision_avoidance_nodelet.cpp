@@ -89,13 +89,15 @@ void CANodelet::onInit()
     collision_free_control_pub_ = nh.advertise<exjobb_msgs::Control>("collision_free_control", 10);
     rumble_pub_ = nh.advertise<joy_rumble::Rumble_msg>("rumble_message", 1);
 
-    float epsilon;
+    float epsilon, max_distance_speed, min_distance_hold;
     priv_nh.param<float>("radius", radius_, 0.25);
     priv_nh.param<float>("security_distance", security_distance_, 0.1);
     priv_nh.param<float>("epsilon", epsilon, 0.1);
+    priv_nh.param<float>("max_distance_speed", max_distance_speed, 1.5);
+    priv_nh.param<float>("min_distance_hold", min_distance_hold, 0.3);
 
     orm_ = new ORM(radius_, security_distance_, epsilon);
-    basic_ = new Basic(radius_, security_distance_);
+    basic_ = new Basic(radius_, max_distance_speed, min_distance_hold);
 }
 
 void CANodelet::sensorReadingsCallback(const exjobb_msgs::SensorReadings::ConstPtr & msg)

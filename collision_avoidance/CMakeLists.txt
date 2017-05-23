@@ -131,7 +131,6 @@ include_directories(
 add_library(${PROJECT_NAME}_nodelet
   src/collision_avoidance_nodelet.cpp
   src/obstacle_restriction_method.cpp
-  src/potential_field_method.cpp
   src/basic.cpp
   src/point.cpp
 )
