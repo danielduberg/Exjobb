@@ -190,7 +190,7 @@ void controlCallback(const exjobb_msgs::Control::ConstPtr & msg)
     {
         lift();
     }
-    else //if (current_state.armed && current_state.mode == "OFFBOARD")
+    else if (current_state.armed && current_state.mode == "OFFBOARD")
     {
         fly(msg->go_direction, msg->go_magnitude, msg->rotate, msg->turn_to_where_going);
     }

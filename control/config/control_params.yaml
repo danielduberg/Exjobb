@@ -1,5 +1,5 @@
 # collision_free_control
 # control
 control_topic: "collision_free_control"
-altitude: 1
+altitude: 0.6
 frequency: 20
